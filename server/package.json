@@ -1,13 +1,10 @@
 {
-    "name": "node-project-slignair",
     "version": "1.0.0",
-    "description": "This is the backend app for Slingair",
-    "main": "server.js",
+    "description": "This is the backend app for HotHub",
+    "main": "index.js",
     "scripts": {
-      "start": "node server.js",
-      "dev:backend": "nodemon server.js"
+      "start": "node index.js"
     },
-    "author": "Scott Morin <scott@journeyedu.co>",
     "license": "MIT",
     "dependencies": {
       "assert": "^2.0.0",
