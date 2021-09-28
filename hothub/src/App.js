@@ -18,9 +18,9 @@ function App() {
     <BrowserRouter>
       <GlobalStyles />
       <Header />
+      <Body>
         <Switch>
           <Route exact path="/">
-            <Login />
           </Route>
           <Route path="/profile/:profileId">
             <Profile />
@@ -35,9 +35,16 @@ function App() {
             <ActorDetails />
           </Route>
         </Switch>
+        </Body>
       <Footer />
     </BrowserRouter>
   );
 }
+
+const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 90vh;
+`
 
 export default App;

@@ -4,22 +4,21 @@
 const express = require("express");
 const morgan = require("morgan");
 
-const {testing} = require('./handlers')
+const { testing, getQuotes } = require("./handlers");
 
 express()
+  .use(express.static("public"))
+  .use(morgan("tiny"))
+  .use(express.json())
 
-.use(express.static('public'))
-.use(morgan("tiny"))
-.use(express.json())
+  //ENPOINTS 👇
 
+  .get("/test", testing)
 
-//ENPOINTS 👇
+  .get("/quotes", getQuotes)
 
-.get('/test', testing)
-
-
-// this is our catch all endpoint.
-.get("*", (req, res) => {
+  // this is our catch all endpoint.
+  .get("*", (req, res) => {
     res.status(404).json({
       status: 404,
       message: "This is obviously not what you are looking for.",
