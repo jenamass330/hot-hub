@@ -9,6 +9,7 @@ const Footer = () => {
 
 const Div = styled.div`
     margin-top: 0 auto;
+    background-color: #fff8dc;
 `
 
 

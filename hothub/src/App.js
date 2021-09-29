@@ -11,6 +11,9 @@ import Header from "./Components/Header"
 import Login from "./Components/Login"
 import MovieDetails from "./Components/MovieDetails"
 import Profile from "./Components/Profile"
+import Contact from "./Components/Contact"
+import About from "./Components/About"
+import Home from "./Components/Home";
 
 
 function App() {
@@ -21,8 +24,9 @@ function App() {
       <Body>
         <Switch>
           <Route exact path="/">
+          <Home />
           </Route>
-          <Route path="/profile/:profileId">
+          <Route path="/profile">
             <Profile />
           </Route>
           <Route path="/movies/:movieId">
@@ -34,6 +38,12 @@ function App() {
           <Route path="/actor/actorId">
             <ActorDetails />
           </Route>
+          <Route path="/About">
+            <About />
+          </Route>
+          <Route exact path="/Contact">
+            <Contact />
+          </Route>
         </Switch>
         </Body>
       <Footer />
@@ -44,7 +54,8 @@ function App() {
 const Body = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 90vh;
+  min-height: 100vh;
+  background-color: #fff8dc;
 `
 
 export default App;

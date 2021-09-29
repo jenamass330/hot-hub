@@ -13,6 +13,8 @@ const Login = () => {
 
 const Button = styled.div`
     margin-right: 20px;
+    font-size: 25px;
+    margin-top: 10px;
     
     &:hover {
         cursor: pointer;

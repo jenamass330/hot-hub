@@ -1,10 +1,12 @@
 import React from "react";
 import { useState } from "react";
+import { useHistory } from "react-router";
 import { CgDetailsMore } from "react-icons/cg";
 import styled from "styled-components";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  let history = useHistory()
 
   return (
     <>
@@ -16,9 +18,9 @@ const Navbar = () => {
             </a>
             {open ? (
               <Dropdown>
-                <Item href='#'>Home</Item>
-                <Item href="#">About</Item>
-                <Item href='#'>Contact</Item>
+                <Item onClick={() => {history.push('/')}}>Home</Item>
+                <Item onClick={() => {history.push('/About')}}>About</Item>
+                <Item onClick={() => {history.push('/Contact')}}>Contact</Item>
               </Dropdown>
             ) : null}
           </Li>
@@ -30,8 +32,11 @@ const Navbar = () => {
 
 const Nav = styled.nav`
   padding: 0 1rem;
-  background-color: white;
+  background-color: #fff8dc;
   margin-top: 10px;
+  position: inherit;
+  z-index: 1000;
+  margin-left: 150px;
 `;
 const Ul = styled.ul`
   max-width: 100%;
@@ -42,11 +47,12 @@ const Ul = styled.ul`
 const Li = styled.li``;
 
 const Dropdown = styled.div`
-    background-color: white;
+    background-color: #fff8dc;
     position: absolute;
     top: 58px;
     width: 200px;
     transform: translateX(-10%);
+    margin-top: -10px;
     padding: 1rem;
     overflow: hidden;
 `
@@ -60,7 +66,7 @@ const Item = styled.a`
     text-decoration: none;
 
     &:hover {
-        background-color: lightgrey;
+        background-color: #F68888;
         color: white;
     }
 `
