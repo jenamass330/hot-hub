@@ -7,6 +7,7 @@ import styled from "styled-components";
 import Login from "./Login";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import ResultCard from "./ResultCard";
+import Watchlist from "./Watchlist";
 
 const Home = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -63,6 +64,7 @@ const Home = () => {
             </Box2>
           </Box>
         </Banners>
+        <Watchlist />
         <div>NewsFeed</div>
       </Wrap>
       <InputWrapper>

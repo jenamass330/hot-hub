@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
 import Watchlist from "./Watchlist";
+import Watched from "./Watched";
 
 const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -19,6 +20,7 @@ const Profile = () => {
           <p>{user.email}</p>
         </div>
         <Watchlist />
+        <Watched />
       </>
     )
   );

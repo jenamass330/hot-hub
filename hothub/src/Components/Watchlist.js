@@ -9,6 +9,7 @@ const Watchlist = () => {
 
   return (
     <>
+    <div>Watchlist</div>
       <Wrapper>
         {watchList.length > 0 ? (
           <Grid>

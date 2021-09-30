@@ -3,11 +3,19 @@ import styled from "styled-components";
 import { GlobalContext } from "../Context/GlobalState";
 
 const ResultCard = ({ movie }) => {
-  const { addMovieToWatchList, watchList } = useContext(GlobalContext);
+  const { addMovieToWatchList, addMovieToWatched, watchList, watched } =
+    useContext(GlobalContext);
 
   let storedMovie = watchList.find((x) => x.id === movie.id);
+  let storedMovieWatched = watched.find((x) => x.id === movie.id);
 
-  const watchListDisabled = storedMovie ? true : false;
+  const watchListDisabled = storedMovie
+    ? true
+    : storedMovieWatched
+    ? true
+    : false;
+
+  const watchedDisabled = storedMovieWatched ? true : false;
 
   return (
     <Results>
@@ -33,7 +41,14 @@ const ResultCard = ({ movie }) => {
             disabled={watchListDisabled}
             onClick={() => addMovieToWatchList(movie)}
           >
-            Add to WatchList
+            Add to Watchlist
+          </Button>
+
+          <Button
+            disabled={watchedDisabled}
+            onClick={() => addMovieToWatched(movie)}
+          >
+            Add to Watched
           </Button>
         </Controls>
       </Info>

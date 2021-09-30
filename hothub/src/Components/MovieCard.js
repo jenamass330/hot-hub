@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import MovieControls from "./MovieControls";
 
 const MovieCard = ({ movie, type }) => {
   return (
@@ -15,6 +16,7 @@ const MovieCard = ({ movie, type }) => {
             <div></div>
           )}
         </Overlay>
+        <MovieControls type={type} movie={movie} />
       </Card>
     </>
   );
