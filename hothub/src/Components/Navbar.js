@@ -6,21 +6,43 @@ import styled from "styled-components";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  let history = useHistory()
+  let history = useHistory();
 
   return (
     <>
       <Nav>
         <Ul>
           <Li>
-            <a href="#" onClick={() => setOpen(!open)} style={{color:"black"}}>
+            <a
+              href="#"
+              onClick={() => setOpen(!open)}
+              style={{ color: "black" }}
+            >
               <CgDetailsMore />
             </a>
             {open ? (
               <Dropdown>
-                <Item onClick={() => {history.push('/')}}>Home</Item>
-                <Item onClick={() => {history.push('/About')}}>About</Item>
-                <Item onClick={() => {history.push('/Contact')}}>Contact</Item>
+                <Item
+                  onClick={() => {
+                    history.push("/");
+                  }}
+                >
+                  Home
+                </Item>
+                <Item
+                  onClick={() => {
+                    history.push("/About");
+                  }}
+                >
+                  About
+                </Item>
+                <Item
+                  onClick={() => {
+                    history.push("/Contact");
+                  }}
+                >
+                  Contact
+                </Item>
               </Dropdown>
             ) : null}
           </Li>
@@ -47,28 +69,28 @@ const Ul = styled.ul`
 const Li = styled.li``;
 
 const Dropdown = styled.div`
-    background-color: #fff8dc;
-    position: absolute;
-    top: 58px;
-    width: 200px;
-    transform: translateX(-10%);
-    margin-top: -10px;
-    padding: 1rem;
-    overflow: hidden;
-`
+  background-color: #fff8dc;
+  position: absolute;
+  top: 58px;
+  width: 200px;
+  transform: translateX(-10%);
+  margin-top: -10px;
+  padding: 1rem;
+  overflow: hidden;
+`;
 const Item = styled.a`
-    height: 50px;
-    display: flex;
-    align-items: center;
-    transition: background(200ms);
-    padding: 0.5rem;
-    color: black;
-    text-decoration: none;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  transition: background(200ms);
+  padding: 0.5rem;
+  color: black;
+  text-decoration: none;
 
-    &:hover {
-        background-color: #F68888;
-        color: white;
-    }
-`
+  &:hover {
+    background-color: #f68888;
+    color: white;
+  }
+`;
 
 export default Navbar;

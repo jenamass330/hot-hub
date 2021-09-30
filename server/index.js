@@ -4,7 +4,7 @@
 const express = require("express");
 const morgan = require("morgan");
 
-const { testing, getQuotes, getMovies } = require("./handlers");
+const { testing, getQuotes, login } = require("./handlers");
 
 express()
   .use(express.static("public"))
@@ -15,9 +15,8 @@ express()
 
   .get("/test", testing)
 
-  .get("/quotes", getQuotes)
-
-  .get('/search/movie', getMovies)
+  // .get("/quotes", getQuotes)
+.post('/users', login)
 
   // this is our catch all endpoint.
   .get("*", (req, res) => {
