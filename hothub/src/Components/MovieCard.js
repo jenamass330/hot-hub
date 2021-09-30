@@ -8,10 +8,12 @@ const MovieCard = ({ movie, type }) => {
       <Card>
         <Overlay>
           {movie.poster_path ? (
-            <img
-              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-              alt={`${movie.title} Poster`}
-            />
+            <>
+              <Poster
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={`${movie.title} Poster`}
+              />
+            </>
           ) : (
             <div></div>
           )}
@@ -24,5 +26,9 @@ const MovieCard = ({ movie, type }) => {
 
 const Overlay = styled.div``;
 const Card = styled.div``;
+
+const Poster = styled.img`
+  height: 100px;
+`;
 
 export default MovieCard;

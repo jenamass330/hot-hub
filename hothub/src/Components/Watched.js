@@ -9,6 +9,7 @@ const Watched = () => {
     return (
         <>
         <div>Watched:</div>
+        <div>{watched.length} movies</div>
       <Wrapper>
         {watched.length > 0 ? (
           <Grid>
@@ -25,6 +26,8 @@ const Watched = () => {
 }
 
 const Wrapper = styled.div``;
-const Grid = styled.div``;
+const Grid = styled.div`
+  display: flex;
+`;
 
 export default Watched;

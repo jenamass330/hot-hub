@@ -55,10 +55,10 @@ const Navbar = () => {
 const Nav = styled.nav`
   padding: 0 1rem;
   background-color: #fff8dc;
-  margin-top: 10px;
+  margin-top: 15px;
   position: inherit;
   z-index: 1000;
-  margin-left: 150px;
+  font-size: 30px;
 `;
 const Ul = styled.ul`
   max-width: 100%;
@@ -88,7 +88,7 @@ const Item = styled.a`
   text-decoration: none;
 
   &:hover {
-    background-color: #f68888;
+    background-color: darkred;
     color: white;
   }
 `;

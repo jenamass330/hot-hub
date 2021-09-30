@@ -14,6 +14,8 @@ import Profile from "./Components/Profile"
 import Contact from "./Components/Contact"
 import About from "./Components/About"
 import Home from "./Components/Home";
+import Watchlist from "./Components/Watchlist";
+import Watched from "./Components/Watched"
 
 
 function App() {
@@ -28,6 +30,12 @@ function App() {
           </Route>
           <Route path="/profile">
             <Profile />
+          </Route>
+          <Route path="/watchlist">
+            <Watchlist />
+          </Route>
+          <Route path="/watched">
+            <Watched />
           </Route>
           <Route path="/movies/:movieId">
             <MovieDetails />

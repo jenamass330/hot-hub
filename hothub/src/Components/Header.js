@@ -30,7 +30,7 @@ const Header = () => {
   // console.log(quote)
 
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <div></div>;
   }
 
   return isAuthenticated ? (
@@ -67,7 +67,7 @@ const Header = () => {
 const HeaderBar = styled.div`
   background-color: #fff8dc;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   height: 50px;
 `;
 const Title = styled.div`
@@ -76,7 +76,7 @@ const Title = styled.div`
 const LoginBar = styled.div`
   display: flex;
   margin-top: 10px;
-  margin-right: 200px;
+  // margin-right: 200px;
 `;
 const QuoteBar = styled.div`
   display: flex;

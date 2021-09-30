@@ -7,7 +7,8 @@ import styled from "styled-components";
 import Login from "./Login";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import ResultCard from "./ResultCard";
-import Watchlist from "./Watchlist";
+
+import WatchListMini from "./WatchListMini";
 
 const Home = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -33,7 +34,7 @@ const Home = () => {
   };
 
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <div></div>;
   }
   return isAuthenticated ? (
     <>
@@ -64,26 +65,26 @@ const Home = () => {
             </Box2>
           </Box>
         </Banners>
-        <Watchlist />
-        <div>NewsFeed</div>
       </Wrap>
       <InputWrapper>
-        <input
+      <NewsFeed>NewsFeed</NewsFeed>
+        <Input
           type="text"
           placeholder="Search for a movie"
           value={query}
           onChange={onChange}
         />
+        {results.length > 0 && (
+          <List>
+            {results.map((movie) => (
+              <li key={movie.id}>
+                <ResultCard movie={movie} />
+              </li>
+            ))}
+          </List>
+        )}
+        <WatchListMini />
       </InputWrapper>
-      {results.length > 0 && (
-        <ul>
-          {results.map((movie) => (
-            <li key={movie.id}>
-              <ResultCard movie={movie} />
-            </li>
-          ))}
-        </ul>
-      )}
     </>
   ) : (
     <>
@@ -124,14 +125,6 @@ const Square = styled.div``;
 
 const Banners = styled.div`
   display: flex;
-`;
-const Gif = styled.iframe`
-  position: absolute;
-  border-radius: 50%;
-  z-index: 1;
-  right: 0px;
-  margin-top: 270px;
-  margin-right: -180px;
 `;
 
 const Overlap = styled.div`
@@ -176,5 +169,24 @@ const Box2 = styled.div`
   font-weight: bold;
   font-style: normal;
 `;
-const InputWrapper = styled.div``;
+const InputWrapper = styled.div`
+  overflow: auto;
+  display: inline-block;
+  border: 1px solid red;
+`;
+
+const Input = styled.input`
+  float: right;
+  
+`
+const List = styled.ul`
+float: right;
+margin-top: 50px;
+margin-right: -250px;
+`
+
+const NewsFeed = styled.div`
+  text-align: center;
+`
+
 export default Home;

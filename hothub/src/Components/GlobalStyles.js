@@ -59,8 +59,8 @@ vertical-align: baseline;
   font-family: 'Nunito Sans',
   sans-serif;
   font-weight: 300;
-  font-size: 32px;
-  text-align: center;
+  color: black;
+  
 }
 p,
 a,

@@ -56,12 +56,22 @@ const ResultCard = ({ movie }) => {
   );
 };
 
-const Results = styled.div``;
+const Results = styled.div`
+
+`;
+
 const Poster = styled.div``;
 const Info = styled.div``;
 const Header = styled.div``;
-const Title = styled.h3``;
-const Release = styled.h4``;
+const Title = styled.h3`
+  width: 200px;
+  text-align: center;
+  font-weight: bold;
+`;
+const Release = styled.h4`
+  width: 200px;
+  text-align: center;
+`;
 const Controls = styled.div``;
 const Button = styled.button``;
 
