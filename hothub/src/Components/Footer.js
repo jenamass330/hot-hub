@@ -6,7 +6,8 @@ const Footer = () => {
 };
 
 const Div = styled.div`
-  margin-top: 0 auto;
+   bottom:0;
+   width:100%;
   background-color: #fff8dc;
 `;
 

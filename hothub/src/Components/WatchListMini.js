@@ -38,7 +38,7 @@ const WatchListMini = () => {
 const WholeWrap = styled.div`
     padding-left: 100px;
     position:relative;
-    z-index: 1
+
 `
 
 const Title = styled.div`

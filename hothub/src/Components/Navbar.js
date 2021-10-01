@@ -86,6 +86,9 @@ const Item = styled.a`
   padding: 0.5rem;
   color: black;
   text-decoration: none;
+  &:hover {
+    cursor: pointer;
+  }
 
   &:hover {
     background-color: darkred;

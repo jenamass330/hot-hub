@@ -63,7 +63,8 @@ const Button = styled.button`
   opacity: 0.5;
   &:hover {
     cursor: pointer;
-    background-color: lightgrey;
+    background-color: #EAE6D7;
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
     opacity: 1;
   }
   &:active {

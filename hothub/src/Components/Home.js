@@ -9,6 +9,7 @@ import { IoPersonCircleSharp } from "react-icons/io5";
 import ResultCard from "./ResultCard";
 
 import WatchListMini from "./WatchListMini";
+import NewsFeed from "./NewsFeed";
 
 const Home = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -32,6 +33,19 @@ const Home = () => {
         console.log(data);
       });
   };
+
+  if (isAuthenticated) {
+    // const databaseUser = getUser(user.email)
+    // if (!databaseUser) {
+      // let newUser = {
+        // email: user.email,
+        // watchlist: [],
+        // watched: [],
+        // 
+      //}
+      // postUser({email: user.email})
+    //}
+  }
 
   if (isLoading) {
     return <div></div>;
@@ -67,7 +81,9 @@ const Home = () => {
         </Banners>
       </Wrap>
       <InputWrapper>
-      <NewsFeed>NewsFeed</NewsFeed>
+      <WatchListMini />
+      <NewsFeed />
+      <InputResult>
         <Input
           type="text"
           placeholder="Search for a movie"
@@ -78,12 +94,12 @@ const Home = () => {
           <List>
             {results.map((movie) => (
               <li key={movie.id}>
-                <ResultCard movie={movie} />
+              <ResultCard movie={movie} />
               </li>
             ))}
           </List>
         )}
-        <WatchListMini />
+        </InputResult>
       </InputWrapper>
     </>
   ) : (
@@ -115,6 +131,11 @@ const Home = () => {
     </>
   );
 };
+
+const InputResult = styled.div`
+  position: absolute;
+  right: 0px;
+`
 
 const Wrap = styled.div`
   background-color: #fff8dc;
@@ -170,23 +191,27 @@ const Box2 = styled.div`
   font-style: normal;
 `;
 const InputWrapper = styled.div`
-  overflow: auto;
-  display: inline-block;
-  border: 1px solid red;
+  // border: 1px solid red;
+  display: flex;
 `;
 
 const Input = styled.input`
-  float: right;
+  border: 1px solid darkred;
   
 `
 const List = styled.ul`
-float: right;
-margin-top: 50px;
-margin-right: -250px;
+margin-top: 10px;
+margin-left: 45px;
 `
 
-const NewsFeed = styled.div`
-  text-align: center;
-`
+// const NewsFeed = styled.div`
+//   text-align: center;
+//   display: block;
+//   width: 30%;
+//   border: 1px solid purple;
+//   position: relative;
+  
+// `
+const Result = styled.div``
 
 export default Home;
