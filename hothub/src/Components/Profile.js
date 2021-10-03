@@ -29,6 +29,7 @@ const Profile = () => {
 
 const Wrap = styled.div`
   display: flex;
+  padding-left: 400px;
   
 `
 const Name = styled.h1`

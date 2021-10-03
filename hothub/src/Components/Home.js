@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ReactDOM } from "react-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Banner from "../assets/image.jpg";
@@ -7,6 +7,7 @@ import styled from "styled-components";
 import Login from "./Login";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import ResultCard from "./ResultCard";
+import DiscoverMini from "./DiscoverMini";
 
 import WatchListMini from "./WatchListMini";
 import NewsFeed from "./NewsFeed";
@@ -33,6 +34,7 @@ const Home = () => {
         console.log(data);
       });
   };
+
 
   if (isAuthenticated) {
     // const databaseUser = getUser(user.email)
@@ -74,14 +76,14 @@ const Home = () => {
             no-one will tell you the plot, so you have to work it out all
             yourself from the clues.” ― Terry Pratchett
             <Box2>
-              So make sure you don't start watching a movie ten minutes in. And,
-              of course, don't forget the popcorn.
+              What kind of lunatic would ever start a movie ten minutes in? Whatever you choose to do with your time, don't forget the popcorn.
             </Box2>
           </Box>
         </Banners>
       </Wrap>
       <InputWrapper>
       <WatchListMini />
+      <DiscoverMini />
       <NewsFeed />
       <InputResult>
         <Input
@@ -126,6 +128,7 @@ const Home = () => {
             </div>
             <Login />
           </LoginBox>
+          <DiscoverMini />
         </Banners>
       </Wrap>
     </>
@@ -197,6 +200,7 @@ const InputWrapper = styled.div`
 
 const Input = styled.input`
   border: 1px solid darkred;
+  background-color: #EAE6D7;
   
 `
 const List = styled.ul`

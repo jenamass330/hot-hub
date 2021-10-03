@@ -15,6 +15,7 @@ import About from "./Components/About";
 import Home from "./Components/Home";
 import Watchlist from "./Components/Watchlist";
 import Watched from "./Components/Watched";
+import DiscoverBig from "./Components/DiscoverBig"
 
 function App() {
   return (
@@ -24,39 +25,33 @@ function App() {
       <Body>
         <Switch>
           <Route exact path="/">
-            
             <Home />
           </Route>
-          
           <Route path="/profile">
             <Profile />
           </Route>
+          <Route path="/discover">
+            <DiscoverBig />
+          </Route>
           <Route path="/watchlist">
-            
             <Watchlist />
           </Route>
           <Route path="/watched">
-            
             <Watched />
           </Route>
           <Route path="/movies/:movieId">
-          
             <MovieDetails />
           </Route>
-          <Route path="/director/:directorId">
-            
+          <Route path="/production/:productionId">
             <DirectorDetails />
           </Route>
           <Route path="/actor/:actorId">
-            
             <ActorDetails />
           </Route>
           <Route path="/About">
-            
             <About />
           </Route>
           <Route exact path="/Contact">
-            
             <Contact />
           </Route>
         </Switch>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const NewsFeed = () => {
@@ -30,7 +29,7 @@ const NewsFeed = () => {
         </Title>
         <AllArticles>
         {articles.slice(0, 20).map((article) => (
-          <SmallWrap to={article.link.url}>
+          <SmallWrap href={article.link.url}>
             <Articles>
             <ImgDate>
               <Image src={article.multimedia.src}></Image>
@@ -84,6 +83,7 @@ const Articles = styled.div`
     padding: 15px;
     padding-bottom: 0px;
     box-shadow: 1px 1px 10px 1px darkred;
+    background-color: #EAE6D7;
     &:hover {
         filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
     }
@@ -108,7 +108,7 @@ const Date = styled.div`
     color: grey;
 `
 
-const SmallWrap = styled(Link)`
+const SmallWrap = styled.a`
     margin-top: 35px;
     align-items: center;
     color: black;

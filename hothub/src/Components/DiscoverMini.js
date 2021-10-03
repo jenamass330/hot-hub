@@ -1,32 +1,49 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { GlobalContext } from "../Context/GlobalState";
 import { useHistory } from "react-router";
-import MovieCard from "./MovieCard";
 import styled from "styled-components";
 
-const WatchedMini = () => {
-  const { watched } = useContext(GlobalContext);
+import DiscoverCard from "./DiscoverCard";
+
+const Discover = () => {
+  const [popular, setPopular] = useState([]);
   let history = useHistory();
+
+  useEffect(() => {
+    const popularMovies = async () => {
+      try {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+        );
+        const popularTitles = await res.json();
+        console.log(popularTitles.results);
+        setPopular(popularTitles.results);
+      } catch (err) {
+        console.log(err, "error");
+      }
+    };
+    popularMovies();
+  }, []);
+
   return (
     <>
       <WholeWrap>
         <Boxed>
-          <Title>Watched:</Title>
+          <Title>Discover:</Title>
           <ViewLength>
-            <div>{watched.length} movies</div>
+            <div>{popular.length} movies</div>
             <ViewMore
               style={{ textDecoration: "underline", color: "darkred" }}
-              onClick={() => history.push("/watched")}
+              onClick={() => history.push("/discover")}
             >
               View More
             </ViewMore>
           </ViewLength>
           <Wrapper>
-            {watched.length > 0 ? (
+            {popular.length > 0 ? (
               <Grid>
-                {watched.slice(0, 6).map((movie) => (
-                  <MovieCard movie={movie} type="watched" />
+                {popular.slice(0, 6).map((movie) => (
+                  <DiscoverCard movie={movie} type="watched" />
                 ))}
               </Grid>
             ) : (
@@ -41,7 +58,8 @@ const WatchedMini = () => {
 
 const WholeWrap = styled.div`
   padding-left: 100px;
-  position: relative;
+  position: absolute;
+  margin-top: 400px;
   z-index: 1;
 `;
 const Boxed = styled.div`
@@ -80,4 +98,4 @@ const ViewMore = styled.div`
   }
 `;
 
-export default WatchedMini;
+export default Discover;

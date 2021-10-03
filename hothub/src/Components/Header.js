@@ -19,7 +19,7 @@ const Header = () => {
   useEffect(() => {
     setInterval(() => {
       setQuote(movieQuotes.random());
-    }, 20000);
+    }, 5000);
   }, []);
 
   return isAuthenticated ? (
@@ -27,8 +27,8 @@ const Header = () => {
       <HeaderBar>
         <Navbar />
         <Title>
-          <div style={{fontSize:"30px", position:"absolute"}}>HotHub Movie Machine</div>
-          <div style={{position:"absolute", marginTop: "40px", textAlign:"center"}}>{quote}</div>
+          <HH onClick={() => {history.push("/")}} style={{fontSize:"30px", position:"absolute"}}>HotHub Movie Machine</HH>
+          <div style={{position:"absolute", marginTop: "40px", textAlign:"center", width:"700px", marginLeft:"-150px"}}>{quote}</div>
         </Title>
         <LoginBar>
           <div style={{ marginTop: "5px", marginRight: "10px" }}></div>
@@ -69,6 +69,16 @@ const Title = styled.div`
   margin-top: 15px;
   margin-left: -300px;
 `;
+
+const HH = styled.div`
+letter-spacing: 3px;
+text-transform: uppercase;
+font-weight: bold;
+&:hover {
+  cursor: pointer;
+}
+`
+
 const LoginBar = styled.div`
   display: flex;
   margin-top: 10px;

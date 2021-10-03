@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import MovieControls from "./MovieControls";
+import DiscoverControls from "./DiscoverControls";
 
-const MovieCard = ({ movie, type }) => {
+const RecommendationCard = ({ movie, type }) => {
+
+
   return (
     <>
       <Card>
@@ -15,14 +17,15 @@ const MovieCard = ({ movie, type }) => {
                 src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                 alt={`${movie.title} Poster`}
               />
-              </Link>
               
+              </Link>
+              <DiscoverControls type={type} movie={movie} />
+              <div style={{fontSize:"15px", width:"90px", textAlign:"center"}}>{movie.title}</div>
             </>
           ) : (
             <div></div>
           )}
         </Overlay>
-        <MovieControls type={type} movie={movie} />
       </Card>
     </>
   );
@@ -32,7 +35,7 @@ const Overlay = styled.div``;
 const Card = styled.div``;
 
 const Poster = styled.img`
-  height: 100px;
+  height: 150px;
 `;
 
-export default MovieCard;
+export default RecommendationCard;
