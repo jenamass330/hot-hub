@@ -16,7 +16,6 @@ const Discover = () => {
           `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
         );
         const popularTitles = await res.json();
-        console.log(popularTitles.results);
         setPopular(popularTitles.results);
       } catch (err) {
         console.log(err, "error");

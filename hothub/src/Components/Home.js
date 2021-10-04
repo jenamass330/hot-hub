@@ -31,7 +31,6 @@ const Home = () => {
         } else {
           setResults([]);
         }
-        console.log(data);
       });
   };
 

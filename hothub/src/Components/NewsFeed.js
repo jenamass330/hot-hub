@@ -11,7 +11,6 @@ const NewsFeed = () => {
           `https://api.nytimes.com/svc/movies/v2/reviews/picks.json?&api-key=${process.env.REACT_APP_NYT_KEY}`
         );
         const articles = await res.json();
-        console.log(articles.results);
         setArticles(articles.results);
       } catch (err) {
         console.log(err, "error");
@@ -59,7 +58,7 @@ const Title = styled.div`
   font-weight: bold;
   display: flex;
   border-bottom: 1px solid grey;
-  box-shadow: 0 4px 4px -3px darkred
+  box-shadow: 0 4px 4px -3px darkred;
 `;
 const News = styled.div``;
 
@@ -71,6 +70,8 @@ const Wrapper = styled.div`
   display: flex;
   margin-right: 300px;
   flex-wrap: wrap;
+  margin-bottom: 150px;
+  margin-top: 30px;
   
 `;
 const Articles = styled.div`

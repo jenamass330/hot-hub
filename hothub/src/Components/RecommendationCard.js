@@ -5,7 +5,6 @@ import DiscoverControls from "./DiscoverControls";
 
 const RecommendationCard = ({ movie, type }) => {
 
-
   return (
     <>
       <Card>

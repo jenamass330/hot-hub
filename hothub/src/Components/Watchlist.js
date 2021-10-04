@@ -6,7 +6,6 @@ import BigMovieCard from "./BigMovieCard";
 
 const Watchlist = () => {
   const { watchList } = useContext(GlobalContext);
-  console.log(watchList);
 
   return (
     <>

@@ -8,7 +8,6 @@ import Navbar from "./Navbar";
 import Logout from "./Logout";
 const movieQuotes = require("movie-quotes");
 
-console.log(movieQuotes);
 
 const Header = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();

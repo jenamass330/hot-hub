@@ -18,7 +18,6 @@ const Recommendation = () => {
           `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
         );
         const simMovies = await result.json();
-        console.log(simMovies.results);
         setSimilar(simMovies.results);
       } catch (err) {
         console.log(err, "nope this ain't workin'");

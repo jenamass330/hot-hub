@@ -7,7 +7,6 @@ import MovieCard from "./MovieCard";
 
 const WatchListMini = () => {
   const { watchList } = useContext(GlobalContext);
-  console.log(watchList);
   let history = useHistory();
 
   return (

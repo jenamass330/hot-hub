@@ -16,7 +16,6 @@ const Credits = () => {
           `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
         );
         const creditDetails = await result.json();
-        console.log(creditDetails);
         setCast(creditDetails.cast);
         setCrew(creditDetails.crew);
       } catch (err) {
@@ -24,7 +23,7 @@ const Credits = () => {
       }
     };
     getCredits();
-  }, []);
+  }, [movieId]);
 
   const castCrew = (
     <SmallWrap>

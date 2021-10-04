@@ -4,7 +4,9 @@ const { response } = require("express");
 // mongodb stuff
 const { MongoClient } = require("mongodb");
 
-const request = require('request-promise')
+// const assert = require("assert");
+
+// const request = require('request-promise')
 
 require("dotenv").config();
 const { MONGO_URI } = process.env;
@@ -14,6 +16,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
+//test
 
 const testing = (req, res) => {
   res.status(200).json({ status: 200, data: "success" });
@@ -21,37 +24,56 @@ const testing = (req, res) => {
 
 //MONGODB AUTH0
 
+const getUsers = async (req, res) => {
+  const client = await new MongoClient(MONGO_URI, options);
 
+  try {
+      // connect
+      await client.connect();
 
+      // declare db
+      const db = client.db("HotHub");
 
+      const users = await db.collection("users").find().toArray();
 
+      // status
+      users
+          ? res.status(200).json({ status: 200, data: users})
+          : res.status(404).json({ status: 404, message: "users not found" });
+  } catch (err) {
+      console.log(err);
+      res.status(500).json({ status: 500, message: "nope" });
+  }
+  client.close()
+};
 
-// const getQuotes = async (req, res) => {
-//   const client = await new MongoClient(MONGO_URI, options);
+const postUser = async(req, res) => {
+  const client = await new MongoClient(MONGO_URI, options);
 
-//   try {
- 
-//      await client.connect();
+  await client.connect();
 
-//      const db = client.db("HotHub");
- 
-//      const quotes = await db.collection("quotes").find().toArray();
+  try {
 
+    const db = client.db("HotHub");
 
-//      quotes
-//       ? res.status(200).json({ status: 200, data:  quotes[Math.floor(Math.random() * quotes.length)]})
-//       : res.status(404).json({ status: 404, data: "quotes not found" });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({ status: 500, data: "nothing works lmao" });
-//   }
-//   client.close()
-// }
+    const newUser = await db.collection("users").insertOne(req.body);
+
+    res.status(200).json({ status: 200, data: req.body, message: "success" });
+  
+
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ status: 500, message: "nope didn't work" });
+  }
+  client.close()
+}
+
 
 
 
 
 module.exports = {
-  testing,
-  // getQuotes,
+  testing, getUsers, postUser
 };
