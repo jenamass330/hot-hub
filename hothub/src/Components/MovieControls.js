@@ -1,15 +1,69 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../Context/GlobalState";
 import styled from "styled-components";
 import { AiOutlineEye, AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const MovieControls = ({ movie, type }) => {
-  const {
-    removeMovieFromWatchList,
-    addMovieToWatched,
-    moveToWatchList,
-    removeFromWatched,
-  } = useContext(GlobalContext);
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const [userData, setUserData] = useState({})
+  // const {
+  //   removeMovieFromWatchList,
+  //   addMovieToWatched,
+  //   moveToWatchList,
+  //   removeFromWatched,
+  // } = useContext(GlobalContext);
+
+  useEffect(() => {
+
+    if (isAuthenticated) {
+      fetch("/user/" + user.email)
+        .then((res) => res.json())
+        .then((data) => {
+          setUserData(data.data)
+          // console.log(data.data.watchList)
+        })
+        .catch((err) => {
+          console.log("error", err);
+        })
+      }
+
+  }, [isAuthenticated, userData]);
+
+
+  const addMovieToWatched = (movie) => {
+    let watchedArray = [...userData.watchedList];
+    watchedArray.push(movie);
+    let postedObject = {
+      method: "POST",
+      body: JSON.stringify({ email: user.email, watchedList: watchedArray }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+    fetch("/watchedlist", postedObject)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserData(data);
+        return data;
+      });
+  };
+
+  const removeMovieFromWatchList = () => {
+
+  }
+
+  const moveToWatchList = () => {
+
+  }
+
+  const removeFromWatched = () => {
+
+  }
+
+
   return (
     <InnerCard>
       {type === "watchList" && (

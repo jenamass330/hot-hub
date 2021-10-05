@@ -6,15 +6,15 @@ import { GlobalProvider } from "./Context/GlobalState";
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalProvider>
-      <Auth0Provider
-        domain="dev-xf5xd66u.us.auth0.com"
-        clientId="N1L5ybIv2MbfKrgqMFIULKD23biKql12"
-        redirectUri={window.location.origin}
-      >
+    <Auth0Provider
+      domain="dev-xf5xd66u.us.auth0.com"
+      clientId="N1L5ybIv2MbfKrgqMFIULKD23biKql12"
+      redirectUri={window.location.origin}
+    >
+      <GlobalProvider>
         <App />
-      </Auth0Provider>
-    </GlobalProvider>
+      </GlobalProvider>
+    </Auth0Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -1,13 +1,31 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
-import Watchlist from "./Watchlist";
 import WatchedMini from "./WatchedMini";
 import WatchListMini from "./WatchListMini";
+import { getUser, updateWatchlist, updateWatchedlist } from "../service";
+
 
 const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  console.log(user);
+  // console.log(user);
+  const [userData, setUserData] = useState({})
+
+  useEffect(() => {
+
+    if (isAuthenticated) {
+      fetch("/user/" + user.email)
+        .then((res) => res.json())
+        .then((data) => {
+          setUserData(data.data)
+          // console.log(data.data.watchList)
+        })
+        .catch((err) => {
+          console.log("error", err);
+        })
+      }
+
+  }, [isAuthenticated, userData]);
 
   if (isLoading) {
     return <div></div>;
@@ -24,7 +42,7 @@ const Profile = () => {
         </Wrap>
         </BigWrap>
         
-        <WatchListMini />
+        <WatchListMini userData={userData} />
         <WatchedMini />
         <Title>Ratings and Reviews</Title>
       </>

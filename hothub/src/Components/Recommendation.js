@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import styled from "styled-components";
-import DiscoverControls from "./DiscoverControls";
 import RecommendationCard from "./RecommendationCard";
 
 const Recommendation = () => {

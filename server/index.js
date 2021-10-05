@@ -4,7 +4,7 @@
 const express = require("express");
 const morgan = require("morgan");
 
-const { testing, getUsers, postUser} = require("./handlers");
+const { testing, getUsers, getUser, postUser, updateWatchlist, updateWatchedList,deleteFromWatchList, findMovieById} = require("./handlers");
 
 express()
   .use(express.static("public"))
@@ -17,9 +17,18 @@ express()
 
   .get("/users", getUsers)
 
+  .get('/user/:email', getUser)
+
+  .get('/movie/:id', findMovieById)
+
   .post('/user', postUser)
 
- 
+  .post('/watchlist', updateWatchlist)
+
+  .post('/watchedlist', updateWatchedList)
+
+  .delete('/watchlist/:id', deleteFromWatchList)
+
   // this is our catch all endpoint.
   .get("*", (req, res) => {
     res.status(404).json({

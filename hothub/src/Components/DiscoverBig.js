@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { GlobalContext } from "../Context/GlobalState";
 import BigDiscoverCard from "./BigDiscoverCard";
 import styled from "styled-components";
-import DiscoverCard from "./DiscoverCard";
+
 
 const DiscoverBig = () => {
   const [popular, setPopular] = useState([]);

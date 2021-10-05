@@ -1,11 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../Context/GlobalState";
 import styled from "styled-components";
 import MovieCard from "./MovieCard";
 import BigMovieCard from "./BigMovieCard";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Watchlist = () => {
-  const { watchList } = useContext(GlobalContext);
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const [watchList, setWatchList] = useState([])
+  // const { watchList } = useContext(GlobalContext);
+
+  useEffect(() => {
+    fetch('/user/'+user.email)
+    .then((res) => res.json())
+        .then((data) => {
+          setWatchList(data.data.watchlist)
+          
+        })
+        .catch((err) => {
+          console.log("error", err)
+        })
+    // console.log(user.email)
+    // getUser(user.email).then((data)=> console.log(data))
+  
+  }, [])
 
   return (
     <>

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ReactDOM } from "react-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import Banner from "../assets/image.jpg";
 import Popcorn from "../assets/popcorncrop.jpg";
 import styled from "styled-components";
 import Login from "./Login";
@@ -16,11 +14,16 @@ const Home = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [userData, setUserData] = useState({});
+
+
+
+
+  // look into debouncing in React
 
   const onChange = (e) => {
     e.preventDefault();
     setQuery(e.target.value);
-
     fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1&include_adult=false&query=${e.target.value}`
     )
@@ -33,6 +36,22 @@ const Home = () => {
         }
       });
   };
+
+  useEffect(() => {
+
+    if (isAuthenticated) {
+      fetch("/user/" + user.email)
+        .then((res) => res.json())
+        .then((data) => {
+          setUserData(data.data)
+          // console.log(data.data.watchList)
+        })
+        .catch((err) => {
+          console.log("error", err);
+        })
+      }
+
+  }, [isAuthenticated, userData]);
 
 
   if (isAuthenticated) {
@@ -81,7 +100,7 @@ const Home = () => {
         </Banners>
       </Wrap>
       <InputWrapper>
-      <WatchListMini />
+      <WatchListMini userData={userData}/>
       <DiscoverMini />
       <NewsFeed />
       <InputResult>
@@ -95,7 +114,7 @@ const Home = () => {
           <List>
             {results.map((movie) => (
               <li key={movie.id}>
-              <ResultCard movie={movie} />
+              <ResultCard movie={movie} userData={userData} setUserData={setUserData}/>
               </li>
             ))}
           </List>

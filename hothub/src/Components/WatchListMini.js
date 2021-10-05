@@ -1,21 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../Context/GlobalState";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import MovieCard from "./MovieCard";
+import { useAuth0 } from "@auth0/auth0-react";
 
-const WatchListMini = () => {
-  const { watchList } = useContext(GlobalContext);
+const WatchListMini = ({userData}) => {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  //let watch = userData.watchlist
   let history = useHistory();
-
+  
   return (
     <>
       <WholeWrap>
+      
         <Boxed>
           <Title>Watchlist:</Title>
           <ViewLength>
-            <div>{watchList.length} movies</div>
+          {userData.watchlist ?
+            <div>{userData.watchlist.length} movies</div>
+            : null}
             <ViewMore
               style={{ textDecoration: "underline", color: "darkred" }}
               onClick={() => history.push("/watchlist")}
@@ -23,12 +28,14 @@ const WatchListMini = () => {
               View More
             </ViewMore>
           </ViewLength>
-          <Wrapper>
-            {watchList.length > 0 ? (
+          <Wrapper> 
+          {userData.watchlist ?
+            <>
+            {userData.watchlist.length > 0 ? (
               <Grid>
-                {watchList.slice(0, 6).map((movie) => (
+                {userData.watchlist.slice(0, 6).map((movie) => (
                   <MovieCard
-                    title={movie.title}
+                    title={movie}
                     movie={movie}
                     type="watchList"
                   />
@@ -37,6 +44,7 @@ const WatchListMini = () => {
             ) : (
               <div>Add movies to your watchlist!</div>
             )}
+            </> : null}
           </Wrapper>
         </Boxed>
       </WholeWrap>
