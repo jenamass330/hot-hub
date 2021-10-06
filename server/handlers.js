@@ -215,7 +215,7 @@ const postReviewToMoviePage = async (req, res) => {
  
 
     if (!foundMovie) {
-      await db.collection("movieReviews").insertOne({movieId, reviews:[review]});
+      await db.collection("movieReviews").insertOne({movieId});
     }
 
     await db

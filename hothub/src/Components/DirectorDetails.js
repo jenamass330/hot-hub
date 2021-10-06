@@ -255,6 +255,7 @@ const DetailWrapper = styled.div`
 
 const Photo = styled.img`
   min-width: 300px;
+  object-fit: cover;
 `;
 
 const Details = styled.div``;

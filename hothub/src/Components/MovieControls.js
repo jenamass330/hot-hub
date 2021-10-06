@@ -24,7 +24,7 @@ const MovieControls = ({ movie, type }) => {
     let watchedArray = [...userData.watchedList];
     watchedArray.push(movie);
     let postedObject = {
-      method: "POST",
+      method: "PUT",
       body: JSON.stringify({ email: user.email, watchedList: watchedArray }),
       headers: {
         Accept: "application/json",
@@ -39,34 +39,51 @@ const MovieControls = ({ movie, type }) => {
       });
   };
 
-  const removeMovieFromWatchList = () => {
-    // let watchArray = [...userData.watchlist]
-    // watchArray.forEach((movie) => {
-    //   if(movie.id === movie.id) {
-    //     watchArray.filter((mov) => mov.id !== movie.id)
-    //   }
-    // })
-    // // userData.watchlist.filter((mov)=> mov.id !== movie.id)
+
+  const removeMovieFromWatchList = (movie) => {
+    let watchArray = [...userData.watchlist]
+    console.log(watchArray)
+          watchArray.filter((mov) => {
+            return mov.id !== movie.id
+          })
+    let postObject = {
+      method: "PUT",
+      body: JSON.stringify({ email: user.email, watchlist: watchArray }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+    fetch("/watchlist", postObject)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserData(data);
+        return data;
+      });
+  };
+
+  const moveToWatchList = () => {};
+
+  const removeFromWatched = (movie) => {
+    // let watchedArray = [...userData.watchedList]
+    //       watchedArray.filter((mov) => {
+    //         return mov.id !== movie.id
+    //       })
     // let postedObject = {
-    //   method: "POST",
-    //   body: JSON.stringify({ email: user.email, watchlist: watchArray }),
+    //   method: "PUT",
+    //   body: JSON.stringify({ email: user.email, watchlist: watchedArray }),
     //   headers: {
     //     Accept: "application/json",
     //     "Content-Type": "application/json",
     //   },
     // };
-    // fetch("/watchlist", postedObject)
+    // fetch("/watchedlist", postedObject)
     //   .then((res) => res.json())
     //   .then((data) => {
     //     setUserData(data);
     //     return data;
     //   });
   };
-
-
-  const moveToWatchList = () => {};
-
-  const removeFromWatched = () => {};
 
   return (
     <InnerCard>

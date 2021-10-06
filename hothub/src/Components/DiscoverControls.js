@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import styled from "styled-components";
 import { AiOutlineEye } from "react-icons/ai";
@@ -11,7 +11,7 @@ const DiscoverControls = ({ movie, type, userData, setUserData }) => {
     let watchArray = [...userData.watchlist];
     watchArray.push(movie);
     let postObject = {
-      method: "POST",
+      method: "PUT",
       body: JSON.stringify({ email: user.email, watchlist: watchArray }),
       headers: {
         Accept: "application/json",
@@ -22,7 +22,7 @@ const DiscoverControls = ({ movie, type, userData, setUserData }) => {
       .then((res) => res.json())
       .then((data) => {
         setUserData(data);
-        return data;
+        window.location.reload()
       });
   };
 

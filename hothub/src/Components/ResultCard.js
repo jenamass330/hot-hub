@@ -20,7 +20,7 @@ const ResultCard = ({ movie, userData, setUserData }) => {
     let watchArray = [...userData.watchlist];
     watchArray.push(movie);
     let postObject = {
-      method: "POST",
+      method: "PUT",
       body: JSON.stringify({ email: user.email, watchlist: watchArray }),
       headers: {
         Accept: "application/json",
@@ -31,6 +31,7 @@ const ResultCard = ({ movie, userData, setUserData }) => {
       .then((res) => res.json())
       .then((data) => {
         setUserData(data);
+        window.location.reload()
       });
   };
 
@@ -64,7 +65,7 @@ const ResultCard = ({ movie, userData, setUserData }) => {
     let watchedArray = [...userData.watchedList];
     watchedArray.push(movie);
     let postedObject = {
-      method: "POST",
+      method: "PUT",
       body: JSON.stringify({ email: user.email, watchedList: watchedArray }),
       headers: {
         Accept: "application/json",

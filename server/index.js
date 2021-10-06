@@ -27,9 +27,9 @@ express()
 
   .post('/user', postUser)
 
-  .post('/watchlist', updateWatchlist)
+  .put('/watchlist', updateWatchlist)
 
-  .post('/watchedlist', updateWatchedList)
+  .put('/watchedlist', updateWatchedList)
 
   .delete('/watchlist/:id', deleteFromWatchList)
 
