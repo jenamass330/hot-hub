@@ -51,21 +51,9 @@ const Home = () => {
         })
       }
 
-  }, [isAuthenticated, userData]);
+  }, [isAuthenticated]);
 
 
-  if (isAuthenticated) {
-    // const databaseUser = getUser(user.email)
-    // if (!databaseUser) {
-      // let newUser = {
-        // email: user.email,
-        // watchlist: [],
-        // watched: [],
-        // 
-      //}
-      // postUser({email: user.email})
-    //}
-  }
 
   if (isLoading) {
     return <div></div>;
@@ -101,7 +89,7 @@ const Home = () => {
       </Wrap>
       <InputWrapper>
       <WatchListMini userData={userData}/>
-      <DiscoverMini />
+      <DiscoverMini userData={userData} setUserData={setUserData} />
       <NewsFeed />
       <InputResult>
         <Input

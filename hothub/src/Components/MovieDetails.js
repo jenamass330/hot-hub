@@ -4,11 +4,13 @@ import styled from "styled-components";
 import Credits from "./Credits";
 import Recommendation from "./Recommendation";
 import ReviewInput from "./ReviewInput";
+import ReviewCard from "./ReviewCard";
 
 const MovieDetails = () => {
   const { movieId } = useParams();
 
   const [film, setFilm] = useState([]);
+  const [reviews, setReviews] = useState([])
 
   useEffect(() => {
     const filmInfo = async () => {
@@ -24,6 +26,19 @@ const MovieDetails = () => {
     };
     filmInfo();
   }, [movieId]);
+
+  useEffect(() => {
+    fetch('/review/' +movieId)
+    .then((res) => res.json())
+    .then((data) => {
+      setReviews(data.data)
+      console.log(data.data)
+    })
+    .catch((err) => {
+      console.log("error", err)
+    })
+  }, [movieId])
+
 
   return (
     <>
@@ -55,7 +70,8 @@ const MovieDetails = () => {
       </BigWrap>
       <Recommendation />
       <Credits />
-      <ReviewInput />
+      <ReviewInput movieId={movieId} movieTitle={film.original_title} />
+      <ReviewCard movieId={movieId}  />
     </>
   );
 };

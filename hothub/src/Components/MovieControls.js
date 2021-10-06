@@ -29,7 +29,7 @@ const MovieControls = ({ movie, type }) => {
         })
       }
 
-  }, [isAuthenticated, userData]);
+  }, [isAuthenticated]);
 
 
   const addMovieToWatched = (movie) => {
@@ -52,7 +52,26 @@ const MovieControls = ({ movie, type }) => {
   };
 
   const removeMovieFromWatchList = () => {
-
+  //   user.watchlist.filter((mov)=> mov.id !== movie.id)
+  //   user.watchlist.forEach((mov)=> {
+  //     if (mov.id === movie.id) { 
+  //   }
+  // })
+  //   let watchArray = [...userData.watchlist]
+  //   let postedObject = {
+  //     method: "POST",
+  //     body: JSON.stringify({ email: user.email, watchlist: watchArray }),
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //     },
+  //   };
+  //   fetch("/watchlist", postedObject)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setUserData(data);
+  //       return data;
+  //     });
   }
 
   const moveToWatchList = () => {
@@ -77,7 +96,7 @@ const MovieControls = ({ movie, type }) => {
             </Button>
             <Button
               style={{ border: "none" }}
-              onClick={() => removeMovieFromWatchList(movie.id)}
+              onClick={() => removeMovieFromWatchList(movie)}
             >
               <AiOutlineClose />
             </Button>

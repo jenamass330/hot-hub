@@ -1,36 +1,57 @@
 import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
+import { AiOutlineStar } from "react-icons/ai";
 
-
-const ReviewInput = () => {
+const ReviewInput = ({ movieId, movieTitle }) => {
   const { user, isAuthenticated, isLoading } = useAuth0();
+  console.log(movieTitle)
 
   const [review, setReview] = useState("");
-  const [charCount, setCharCount] = useState(0)
+  const [rating, setRating] = useState("")
+  const [charCount, setCharCount] = useState(0);
 
   const reviewField = (e) => {
     setReview(e.target.value);
-    setCharCount(e.target.value.length)
+    setCharCount(e.target.value.length);
   };
 
-  const submitReview = () => {
-      if (charCount > 10) {
+  const ratingField = (e) =>{
+    setRating(e.target.value)
+  }
 
-    fetch("/api/review", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ status: review }),
-    });
+  console.log(rating)
+
+  const submitReview = (e) => {
+    e.preventDefault();
+    if (charCount > 10) {
+      fetch("/review", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          movieId: movieId,
+          movieTitle: movieTitle,
+          review: {
+            email: user.email,
+            userName: user.name,
+            userPic: user.picture,
+            review: review,
+            rating: rating,
+          },
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === 200) {
+            window.location.reload();
+          }
+        });
     } else {
-        window.alert("You need a minimum of 10 characters to post!")
+      window.alert("You need a minimum of 10 characters to post!");
     }
   };
-
-  console.log(review);
-
 
   if (isLoading) {
     return <div></div>;
@@ -40,17 +61,26 @@ const ReviewInput = () => {
     isAuthenticated && (
       <>
         <Form onSubmit={submitReview}>
-       
           <Avatar src={user.picture} alt={user.name} />
-      
+
           <TextBox
             onChange={reviewField}
             type="text"
+            list="stars"
             placeholder="Drop a review!"
             onFocus={(e) => (e.target.placeholder = "")}
             onBlur={(e) => (e.target.placeholder = "Drop a review!")}
           ></TextBox>
-          
+          <Label for="rating"></Label>
+            <Select value={rating} onChange={ratingField} required>
+              <Option value="" selected disabled hidden>Rating:</Option>
+              <Option value="1/5">⭐</Option>
+              <Option value="2/5">⭐⭐</Option>
+              <Option value="3/5">⭐⭐⭐</Option>
+              <Option value="4/5">⭐⭐⭐⭐</Option>
+              <Option value="5/5">⭐⭐⭐⭐⭐</Option>
+  
+            </Select>
           <Button>Post</Button>
         </Form>
       </>
@@ -102,5 +132,34 @@ const Avatar = styled.img`
   z-index: 10;
 `;
 
+const Option = styled.option`
+font-size: 40px;
+`;
+
+
+const Select = styled.select`
+  position: absolute;
+  width: 10;
+  height: 10;
+  margin-left: 75%;
+  transform: translateX(-50%);
+  margin-top: -180px;
+  border-radius: 20px;
+  background-color: #eae6d7;
+  border: none;
+  display: inline-block;
+  text-align: center;
+  font-size: 20px;
+`;
+
+const Label = styled.label`
+margin-left: 66%;
+transform: translateX(-50%);
+margin-top: -181px;
+position: absolute;
+font-weight: bold;
+color: darkred;
+display: inline-block;
+`
 
 export default ReviewInput;

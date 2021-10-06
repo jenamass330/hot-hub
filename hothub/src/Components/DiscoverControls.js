@@ -2,11 +2,29 @@ import React, { useContext } from "react";
 import { GlobalContext } from "../Context/GlobalState";
 import styled from "styled-components";
 import { AiOutlineEye, AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
+import { useAuth0 } from "@auth0/auth0-react";
 
-const DiscoverControls = ({movie, type}) => {
-    const {
-        moveToWatchList,
-      } = useContext(GlobalContext);
+const DiscoverControls = ({movie, type, userData, setUserData}) => {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
+  const addMovieToWatchList = (movie) => {
+    let watchArray = [...userData.watchlist];
+    watchArray.push(movie);
+    let postObject = {
+      method: "POST",
+      body: JSON.stringify({ email: user.email, watchlist: watchArray }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+    fetch("/watchlist", postObject)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserData(data);
+        return data;
+      });
+  };
 
       return (
         <InnerCard>
@@ -15,7 +33,7 @@ const DiscoverControls = ({movie, type}) => {
             <Wrapper>
               <Button
                 style={{ border: "none" }}
-                onClick={() => moveToWatchList(movie)}
+                onClick={() => addMovieToWatchList(movie)}
               >
                 <AiOutlineEye />
               </Button>

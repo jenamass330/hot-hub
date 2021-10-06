@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import DiscoverCard from "./DiscoverCard";
 
-const Discover = () => {
+const Discover = ({userData, setUserData}) => {
   const [popular, setPopular] = useState([]);
   let history = useHistory();
 
@@ -41,7 +41,7 @@ const Discover = () => {
             {popular.length > 0 ? (
               <Grid>
                 {popular.slice(0, 6).map((movie) => (
-                  <DiscoverCard movie={movie} type="watched" />
+                  <DiscoverCard userData={userData} setUserData={setUserData} movie={movie} type="watched" />
                 ))}
               </Grid>
             ) : (

@@ -7,26 +7,26 @@ import styled from "styled-components";
 import { getUser } from "../service";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const WatchedMini = () => {
+const WatchedMini = ({watched}) => {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  const [watched, setWatched] = useState([])
+  // const [watched, setWatched] = useState([])
   let history = useHistory();
   
 
-useEffect(() => {
-  fetch('/user/'+user.email)
-  .then((res) => res.json())
-      .then((data) => {
-        setWatched(data.data.watchedList)
+// useEffect(() => {
+//   fetch('/user/'+user.email)
+//   .then((res) => res.json())
+//       .then((data) => {
+//         setWatched(data.data.watchedList)
         
-      })
-      .catch((err) => {
-        console.log("error", err)
-      })
-  // console.log(user.email)
-  // getUser(user.email).then((data)=> console.log(data))
+//       })
+//       .catch((err) => {
+//         console.log("error", err)
+//       })
+//   // console.log(user.email)
+//   // getUser(user.email).then((data)=> console.log(data))
 
-}, [])
+// }, [])
 
   // const { watched } = useContext(GlobalContext);
   
@@ -36,7 +36,9 @@ useEffect(() => {
         <Boxed>
           <Title>Watched:</Title>
           <ViewLength>
+          {watched ?
             <div>{watched.length} movies</div>
+            : null}
             <ViewMore
               style={{ textDecoration: "underline", color: "darkred" }}
               onClick={() => history.push("/watched")}

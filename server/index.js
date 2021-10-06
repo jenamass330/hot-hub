@@ -4,7 +4,7 @@
 const express = require("express");
 const morgan = require("morgan");
 
-const { testing, getUsers, getUser, postUser, updateWatchlist, updateWatchedList,deleteFromWatchList, findMovieById} = require("./handlers");
+const { testing, getUsers, getUser, postUser, updateWatchlist, updateWatchedList,deleteFromWatchList, postReviewToMoviePage, getReviews, getReviewsById} = require("./handlers");
 
 express()
   .use(express.static("public"))
@@ -19,7 +19,11 @@ express()
 
   .get('/user/:email', getUser)
 
-  .get('/movie/:id', findMovieById)
+  .get('/reviews', getReviews)
+
+  .get('/review/:movieId', getReviewsById)
+
+  .post('/review', postReviewToMoviePage)
 
   .post('/user', postUser)
 

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import DiscoverControls from "./DiscoverControls";
 
-const DiscoverCard = ({ movie, type }) => {
+const DiscoverCard = ({ movie, type, userData, setUserData }) => {
   return (
     <>
       <Card>
@@ -21,7 +21,7 @@ const DiscoverCard = ({ movie, type }) => {
             <div></div>
           )}
         </Overlay>
-        <DiscoverControls type={type} movie={movie} />
+        <DiscoverControls userData={userData} setUserData={setUserData} type={type} movie={movie} />
       </Card>
     </>
   );
