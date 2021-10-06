@@ -42,10 +42,10 @@ function App() {
           <Route path="/movies/:movieId">
             <MovieDetails />
           </Route>
-          <Route path="/production/:productionId">
+          <Route path="/person/:productionId">
             <DirectorDetails />
           </Route>
-          <Route path="/actor/:actorId">
+          <Route path="/person/:actorId">
             <ActorDetails />
           </Route>
           <Route path="/About">

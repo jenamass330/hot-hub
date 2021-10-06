@@ -1,26 +1,20 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { GlobalContext } from "../Context/GlobalState";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import MovieCard from "./MovieCard";
-import { useAuth0 } from "@auth0/auth0-react";
 
-const WatchListMini = ({userData}) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  //let watch = userData.watchlist
+const WatchListMini = ({ userData }) => {
   let history = useHistory();
-  
+
   return (
     <>
       <WholeWrap>
-      
         <Boxed>
           <Title>Watchlist:</Title>
           <ViewLength>
-          {userData.watchlist ?
-            <div>{userData.watchlist.length} movies</div>
-            : null}
+            {userData.watchlist ? (
+              <div>{userData.watchlist.length} movies</div>
+            ) : null}
             <ViewMore
               style={{ textDecoration: "underline", color: "darkred" }}
               onClick={() => history.push("/watchlist")}
@@ -28,23 +22,20 @@ const WatchListMini = ({userData}) => {
               View More
             </ViewMore>
           </ViewLength>
-          <Wrapper> 
-          {userData.watchlist ?
-            <>
-            {userData.watchlist.length > 0 ? (
-              <Grid>
-                {userData.watchlist.slice(0, 6).map((movie) => (
-                  <MovieCard
-                    title={movie}
-                    movie={movie}
-                    type="watchList"
-                  />
-                ))}
-              </Grid>
-            ) : (
-              <div>Add movies to your watchlist!</div>
-            )}
-            </> : null}
+          <Wrapper>
+            {userData.watchlist ? (
+              <>
+                {userData.watchlist.length > 0 ? (
+                  <Grid>
+                    {userData.watchlist.slice(0, 6).map((movie) => (
+                      <MovieCard title={movie} movie={movie} type="watchList" />
+                    ))}
+                  </Grid>
+                ) : (
+                  <div>Add movies to your watchlist!</div>
+                )}
+              </>
+            ) : null}
           </Wrapper>
         </Boxed>
       </WholeWrap>

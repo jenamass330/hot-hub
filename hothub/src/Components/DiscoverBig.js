@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import BigDiscoverCard from "./BigDiscoverCard";
 import styled from "styled-components";
 
-
 const DiscoverBig = () => {
   const [popular, setPopular] = useState([]);
 
@@ -55,7 +54,6 @@ const DiscoverBig = () => {
 const BigWrap = styled.div`
   padding-left: 200px;
   padding-right: 200px;
-
 `;
 
 const Wrapper = styled.div``;

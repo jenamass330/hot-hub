@@ -1,14 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { GlobalContext } from "../Context/GlobalState";
-import { useAuth0 } from "@auth0/auth0-react";
-import { updateWatchedlist, updateWatchlist } from "../service";
-import { AiOutlineStar } from "react-icons/ai";
+import { Icon } from "@iconify/react";
 
 const ReviewCard = ({ movieId }) => {
   const [reviews, setReviews] = useState([]);
-  const { user, isAuthenticated, isLoading } = useAuth0();
 
   useEffect(() => {
     fetch("/review/" + movieId)
@@ -21,20 +16,32 @@ const ReviewCard = ({ movieId }) => {
       });
   }, [movieId]);
 
-  console.log(reviews);
 
   return (
     <>
       {reviews ? (
         <>
-          <Div style={{ marginTop: "50px" }}>Ratings & Reviews</Div>
+          <Div style={{ marginTop: "50px", borderRadius: "10px" }}>
+            Ratings & Reviews
+          </Div>
           {reviews.map((review) => (
             <>
               <Wrapper>
                 <Wrapped>
                   <Review>{review.review}</Review>
                   <Rating>{review.rating}</Rating>
-                  <div><AiOutlineStar style={{color:"#ffd800", fontSize:"60px", position:"absolute", right:"0px", marginTop:"-80px"}}/></div>
+                  <div>
+                    <Icon
+                      icon="noto:popcorn"
+                      style={{
+                        fontSize: "40px",
+                        position: "absolute",
+                        right: "0px",
+                        marginTop: "-75px",
+                        paddingRight: "3px",
+                      }}
+                    />
+                  </div>
                 </Wrapped>
                 <Square></Square>
                 <NamePic>
@@ -60,7 +67,6 @@ const Div = styled.div`
   margin-left: 50%;
   transform: translate(-50%);
   margin-bottom: 50px;
-
 `;
 
 const Wrapper = styled.div`
@@ -73,7 +79,9 @@ const Wrapper = styled.div`
   padding: 10px;
   box-shadow: 0 15px 10px -2px darkred; ;
 `;
-const Wrapped = styled.div``;
+const Wrapped = styled.div`
+  margin-right: 60px;
+`;
 
 const NamePic = styled.div`
   display: flex;
@@ -114,11 +122,16 @@ const Square = styled.div`
 `;
 
 const Rating = styled.div`
-    position: absolute;
-    right: 0;
-    margin-top: -57px;
-    margin-right: 18px;
-    z-index: 10;
-`
+  position: absolute;
+  right: 0;
+  margin-top: -65px;
+  z-index: 10;
+  font-weight: bold;
+  font-size: 25px;
+  color: #cc0000;
+  background-color: white;
+  border-radius: 50%;
+  margin-right: 16px;
+`;
 
 export default ReviewCard;

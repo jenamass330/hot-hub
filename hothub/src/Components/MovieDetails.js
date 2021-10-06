@@ -10,7 +10,7 @@ const MovieDetails = () => {
   const { movieId } = useParams();
 
   const [film, setFilm] = useState([]);
-  const [reviews, setReviews] = useState([])
+  const [provider, setProvider] = useState([]);
 
   useEffect(() => {
     const filmInfo = async () => {
@@ -24,21 +24,20 @@ const MovieDetails = () => {
         console.log(err, "something ain't right");
       }
     };
+    const filmProviders = async () => {
+      try {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=${process.env.REACT_APP_TMDB_KEY}`
+        );
+        const providerDetails = await res.json();
+        setProvider(providerDetails.results.CA.buy);
+      } catch (err) {
+        console.log("something went wrong", err);
+      }
+    };
     filmInfo();
+    filmProviders();
   }, [movieId]);
-
-  useEffect(() => {
-    fetch('/review/' +movieId)
-    .then((res) => res.json())
-    .then((data) => {
-      setReviews(data.data)
-      console.log(data.data)
-    })
-    .catch((err) => {
-      console.log("error", err)
-    })
-  }, [movieId])
-
 
   return (
     <>
@@ -68,10 +67,27 @@ const MovieDetails = () => {
           )}
         </Wrapper>
       </BigWrap>
+      <ProvWrap>
+      {provider ? (
+      provider.map((prov) => (
+        
+          <div style={{textAlign:"center"}}>
+            <Logo src={`https://image.tmdb.org/t/p/w200${prov.logo_path}`} />
+            <div style={{width: "100px"}}>{prov.provider_name}</div>
+          </div>
+        
+      ))
+    ): null }
+      </ProvWrap>
+
       <Recommendation />
       <Credits />
-      <ReviewInput movieId={movieId} movieTitle={film.original_title} />
-      <ReviewCard movieId={movieId}  />
+      <ReviewInput
+        movieId={movieId}
+        movieTitle={film.original_title}
+        moviePicture={film.poster_path}
+      />
+      <ReviewCard movieId={movieId} />
     </>
   );
 };
@@ -116,6 +132,20 @@ const Release = styled.div`
   bottom: 0px;
   margin-bottom: 20px;
   margin-left: 15%;
+`;
+
+const ProvWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 800px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 50px;
+`;
+
+const Logo = styled.img`
+  height: 25px;
+  border-radius: 50%;
 `;
 
 export default MovieDetails;

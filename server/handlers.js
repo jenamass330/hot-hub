@@ -53,7 +53,6 @@ const getUser = async (req, res) => {
   console.clear();
   const client = await new MongoClient(MONGO_URI, options);
   const email = req.params.email;
-  console.log(email);
 
   try {
     // connect
@@ -123,7 +122,6 @@ const updateWatchlist = async (req, res) => {
     const query = { email: req.body.email };
     const user = await db.collection("users").findOne(query);
 
-    console.log(req.body);
 
     if (user) {
       const newWatchlist = { $set: { watchlist: req.body.watchlist } };
@@ -206,7 +204,7 @@ const postReviewToMoviePage = async (req, res) => {
   try {
     await client.connect();
     const db = client.db("HotHub");
-    const {review, movieId, movieTitle, rating} = req.body;
+    const {review, movieId, movieTitle, rating, moviePicture} = req.body;
 
     // const movieReviews = await db.collection("movieReviews").find().toArray();
 
@@ -231,7 +229,7 @@ const postReviewToMoviePage = async (req, res) => {
       .collection("users")
       .updateOne(
         { email: review.email },
-        { $push: { reviews: {review, movieTitle, rating}} }
+        { $push: { reviews: {review, movieTitle, rating, moviePicture}} }
       );
 
     res

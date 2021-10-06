@@ -27,24 +27,51 @@ const NewsFeed = () => {
           <Div>Feed</Div>
         </Title>
         <AllArticles>
-        {articles.slice(0, 20).map((article) => (
-          <SmallWrap href={article.link.url}>
-            <Articles>
-            <ImgDate>
-              <Image src={article.multimedia.src}></Image>
-              <Date>{article.publication_date}</Date>
-              </ImgDate>
-              <Text>
-                <div style={{fontSize:"20px", textAlign:"center", fontWeight:"bold", marginBottom:"25px"}}>{article.headline}</div>
-                <div style={{fontWeight:"bold", textAlign:"center", marginBottom:"25px"}}>{article.byline}</div>
-                <div style={{textAlign:"center", marginBottom:"20px"}}>{article.summary_short}</div>
-                <a href={article.link.url} style={{color:"black", textTransform:"uppercase", marginLeft:"80%"}} >
-                  Read More
-                </a>
-              </Text>
-            </Articles>
-          </SmallWrap>
-        ))}
+          {articles.slice(0, 20).map((article) => (
+            <SmallWrap href={article.link.url}>
+              <Articles>
+                <ImgDate>
+                  <Image src={article.multimedia.src}></Image>
+                  <Date>{article.publication_date}</Date>
+                </ImgDate>
+                <Text>
+                  <div
+                    style={{
+                      fontSize: "20px",
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      marginBottom: "25px",
+                      width: "500px",
+                    }}
+                  >
+                    {article.headline}
+                  </div>
+                  <div
+                    style={{
+                      fontWeight: "bold",
+                      textAlign: "center",
+                      marginBottom: "25px",
+                    }}
+                  >
+                    {article.byline}
+                  </div>
+                  <div style={{ textAlign: "center", marginBottom: "20px" }}>
+                    {article.summary_short}
+                  </div>
+                  <a
+                    href={article.link.url}
+                    style={{
+                      color: "black",
+                      textTransform: "uppercase",
+                      marginLeft: "80%",
+                    }}
+                  >
+                    Read More
+                  </a>
+                </Text>
+              </Articles>
+            </SmallWrap>
+          ))}
         </AllArticles>
       </Wrapper>
     </>
@@ -72,57 +99,53 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   margin-bottom: 150px;
   margin-top: 30px;
-  
+  width: 1700px;
 `;
 const Articles = styled.div`
-    display: flex;
-    margin-bottom: 35px;
-    border: 1px solid darkred;
-    width: 1000px;
-    align-items: center;
-    // margin-left: 225px;
-    padding: 15px;
-    padding-bottom: 0px;
-    box-shadow: 1px 1px 10px 1px darkred;
-    background-color: #EAE6D7;
-    &:hover {
-        filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
-    }
+  display: flex;
+  margin-bottom: 35px;
+  border: 1px solid darkred;
+  width: 1000px;
+  align-items: center;
+  // margin-left: 225px;
+  padding: 15px;
+  padding-bottom: 0px;
+  box-shadow: 1px 1px 10px 1px darkred;
+  background-color: #eae6d7;
+  &:hover {
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
 `;
 
-const Text = styled.div`
-    
-`
+const Text = styled.div``;
 
 const Image = styled.img`
-    // margin-top: 25px;
-    display: block;
+  // margin-top: 25px;
+  display: block;
 `;
 
-const ImgDate = styled.div`
-    
-`
+const ImgDate = styled.div``;
 
 const Date = styled.div`
-    right: 0px;
-    float: right;
-    color: grey;
-`
+  right: 0px;
+  float: right;
+  color: grey;
+`;
 
 const SmallWrap = styled.a`
-    margin-top: 35px;
-    align-items: center;
-    color: black;
-    text-decoration: none;
-    &:hover {
-        cursor: pointer;
-    }
-`
+  margin-top: 35px;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 const AllArticles = styled.div`
-    margin-left: 50%;
-    transform: translateX(-50%);
-    margin-top: 30px;
-`
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-top: 30px;
+`;
 
 export default NewsFeed;

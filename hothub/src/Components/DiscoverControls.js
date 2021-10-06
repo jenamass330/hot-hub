@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { GlobalContext } from "../Context/GlobalState";
+import React from "react";
+
 import styled from "styled-components";
-import { AiOutlineEye, AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineEye } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const DiscoverControls = ({movie, type, userData, setUserData}) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+const DiscoverControls = ({ movie, type, userData, setUserData }) => {
+  const { user } = useAuth0();
 
   const addMovieToWatchList = (movie) => {
     let watchArray = [...userData.watchlist];
@@ -26,23 +26,23 @@ const DiscoverControls = ({movie, type, userData, setUserData}) => {
       });
   };
 
-      return (
-        <InnerCard>
-        {type === "watched" && (
-          <>
-            <Wrapper>
-              <Button
-                style={{ border: "none" }}
-                onClick={() => addMovieToWatchList(movie)}
-              >
-                <AiOutlineEye />
-              </Button>
-            </Wrapper>
-          </>
-        )}
-      </InnerCard>
-      )
-}
+  return (
+    <InnerCard>
+      {type === "watched" && (
+        <>
+          <Wrapper>
+            <Button
+              style={{ border: "none" }}
+              onClick={() => addMovieToWatchList(movie)}
+            >
+              <AiOutlineEye />
+            </Button>
+          </Wrapper>
+        </>
+      )}
+    </InnerCard>
+  );
+};
 
 const InnerCard = styled.div``;
 const Wrapper = styled.div`
@@ -55,7 +55,7 @@ const Button = styled.button`
   opacity: 0.5;
   &:hover {
     cursor: pointer;
-    background-color: #EAE6D7;
+    background-color: #eae6d7;
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
     opacity: 1;
   }
@@ -65,4 +65,4 @@ const Button = styled.button`
   }
 `;
 
-export default DiscoverControls
+export default DiscoverControls;

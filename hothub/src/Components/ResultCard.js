@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { GlobalContext } from "../Context/GlobalState";
 import { useAuth0 } from "@auth0/auth0-react";
-import { updateWatchedlist, updateWatchlist } from "../service";
 
 const ResultCard = ({ movie, userData, setUserData }) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user } = useAuth0();
   const [disabled, setDisabled] = useState(false);
   const [disabledButton, setDisabledButton] = useState(false);
 
@@ -33,7 +31,6 @@ const ResultCard = ({ movie, userData, setUserData }) => {
       .then((res) => res.json())
       .then((data) => {
         setUserData(data);
-        return data;
       });
   };
 
@@ -129,12 +126,12 @@ const Poster = styled.div``;
 const Info = styled.div``;
 const Header = styled.div``;
 const Title = styled.h3`
-  width: 200px;
+  width: 350px;
   text-align: center;
   font-weight: bold;
 `;
 const Release = styled.h4`
-  width: 200px;
+  width: 350px;
   text-align: center;
 `;
 const Controls = styled.div``;

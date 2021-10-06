@@ -10,13 +10,12 @@ const MovieCard = ({ movie, type }) => {
         <Overlay>
           {movie.poster_path ? (
             <>
-            <Link to={`/movies/${movie.id}`}>
-              <Poster
-                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                alt={`${movie.title} Poster`}
-              />
+              <Link to={`/movies/${movie.id}`}>
+                <Poster
+                  src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                  alt={`${movie.title} Poster`}
+                />
               </Link>
-              
             </>
           ) : (
             <div></div>

@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
-import { AiOutlineStar } from "react-icons/ai";
 
-const ReviewInput = ({ movieId, movieTitle }) => {
+const ReviewInput = ({ movieId, movieTitle, moviePicture }) => {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  console.log(movieTitle)
 
   const [review, setReview] = useState("");
-  const [rating, setRating] = useState("")
+  const [rating, setRating] = useState("");
   const [charCount, setCharCount] = useState(0);
 
   const reviewField = (e) => {
@@ -16,11 +14,10 @@ const ReviewInput = ({ movieId, movieTitle }) => {
     setCharCount(e.target.value.length);
   };
 
-  const ratingField = (e) =>{
-    setRating(e.target.value)
-  }
+  const ratingField = (e) => {
+    setRating(e.target.value);
+  };
 
-  console.log(rating)
 
   const submitReview = (e) => {
     e.preventDefault();
@@ -39,6 +36,7 @@ const ReviewInput = ({ movieId, movieTitle }) => {
             userPic: user.picture,
             review: review,
             rating: rating,
+            moviePicture: moviePicture,
           },
         }),
       })
@@ -72,15 +70,16 @@ const ReviewInput = ({ movieId, movieTitle }) => {
             onBlur={(e) => (e.target.placeholder = "Drop a review!")}
           ></TextBox>
           <Label for="rating"></Label>
-            <Select value={rating} onChange={ratingField} required>
-              <Option value="" selected disabled hidden>Rating:</Option>
-              <Option value="1/5">⭐</Option>
-              <Option value="2/5">⭐⭐</Option>
-              <Option value="3/5">⭐⭐⭐</Option>
-              <Option value="4/5">⭐⭐⭐⭐</Option>
-              <Option value="5/5">⭐⭐⭐⭐⭐</Option>
-  
-            </Select>
+          <Select value={rating} onChange={ratingField} required>
+            <Option value="" selected disabled hidden>
+              Rating:
+            </Option>
+            <Option value="1">🍿</Option>
+            <Option value="2">🍿🍿</Option>
+            <Option value="3">🍿🍿🍿</Option>
+            <Option value="4">🍿🍿🍿🍿</Option>
+            <Option value="5">🍿🍿🍿🍿🍿</Option>
+          </Select>
           <Button>Post</Button>
         </Form>
       </>
@@ -133,15 +132,14 @@ const Avatar = styled.img`
 `;
 
 const Option = styled.option`
-font-size: 40px;
+  font-size: 40px;
 `;
-
 
 const Select = styled.select`
   position: absolute;
   width: 10;
   height: 10;
-  margin-left: 75%;
+  margin-left: 74%;
   transform: translateX(-50%);
   margin-top: -180px;
   border-radius: 20px;
@@ -153,13 +151,13 @@ const Select = styled.select`
 `;
 
 const Label = styled.label`
-margin-left: 66%;
-transform: translateX(-50%);
-margin-top: -181px;
-position: absolute;
-font-weight: bold;
-color: darkred;
-display: inline-block;
-`
+  margin-left: 66%;
+  transform: translateX(-50%);
+  margin-top: -181px;
+  position: absolute;
+  font-weight: bold;
+  color: darkred;
+  display: inline-block;
+`;
 
 export default ReviewInput;

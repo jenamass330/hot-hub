@@ -16,7 +16,7 @@ const Footer = () => {
           <RiTwitterLine />
         </Div>
       </Wrap>
-      <Div style={{fontSize:"15px"}}>2021 - All rights reserved.</Div>
+      <Div style={{ fontSize: "15px" }}>2021 - All rights reserved.</Div>
     </>
   );
 };

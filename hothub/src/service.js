@@ -2,7 +2,6 @@ export const getUser = (email) => {
   fetch('/user/'+email)
   .then((res) => res.json())
       .then((data) => {
-        // console.log(data)
         return data;
       });
 }
@@ -23,7 +22,6 @@ export const updateWatchlist = (email, newWatchlist) => {
   fetch('/watchlist', postObject)
   .then((res) => res.json())
   .then((data) => {
-    console.log(data)
     return data;
   })
 }
@@ -40,7 +38,6 @@ export const updateWatchedlist = (email, newWatchedList) => {
   fetch('/watchedlist', postObject)
   .then((res) => res.json())
   .then((data) => {
-    console.log(data)
     return data;
   })
 }

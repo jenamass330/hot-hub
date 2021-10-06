@@ -8,11 +8,10 @@ import Navbar from "./Navbar";
 import Logout from "./Logout";
 const movieQuotes = require("movie-quotes");
 
-
 const Header = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   const [quote, setQuote] = useState(null);
-  const [quoteInTimeout, setQuoteInTimeout] = useState(null);
+
   let history = useHistory();
 
   useEffect(() => {
@@ -26,8 +25,25 @@ const Header = () => {
       <HeaderBar>
         <Navbar />
         <Title>
-          <HH onClick={() => {history.push("/")}} style={{fontSize:"30px", position:"absolute"}}>HotHub Movie Machine</HH>
-          <div style={{position:"absolute", marginTop: "40px", textAlign:"center", width:"700px", marginLeft:"-150px"}}>{quote}</div>
+          <HH
+            onClick={() => {
+              history.push("/");
+            }}
+            style={{ fontSize: "30px", position: "absolute" }}
+          >
+            HotHub Movie Machine
+          </HH>
+          <div
+            style={{
+              position: "absolute",
+              marginTop: "40px",
+              textAlign: "center",
+              width: "700px",
+              marginLeft: "-150px",
+            }}
+          >
+            {quote}
+          </div>
         </Title>
         <LoginBar>
           <div style={{ marginTop: "5px", marginRight: "10px" }}></div>
@@ -61,7 +77,6 @@ const HeaderBar = styled.div`
   display: flex;
   justify-content: space-between;
   height: 100px;
-  
 `;
 
 const Title = styled.div`
@@ -70,13 +85,13 @@ const Title = styled.div`
 `;
 
 const HH = styled.div`
-letter-spacing: 3px;
-text-transform: uppercase;
-font-weight: bold;
-&:hover {
-  cursor: pointer;
-}
-`
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: bold;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 const LoginBar = styled.div`
   display: flex;

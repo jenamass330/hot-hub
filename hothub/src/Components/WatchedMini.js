@@ -1,44 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { GlobalContext } from "../Context/GlobalState";
+import React from "react";
+
 import { useHistory } from "react-router";
 import MovieCard from "./MovieCard";
 import styled from "styled-components";
-import { getUser } from "../service";
-import { useAuth0 } from "@auth0/auth0-react";
 
-const WatchedMini = ({watched}) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+const WatchedMini = ({ watched }) => {
   // const [watched, setWatched] = useState([])
   let history = useHistory();
-  
 
-// useEffect(() => {
-//   fetch('/user/'+user.email)
-//   .then((res) => res.json())
-//       .then((data) => {
-//         setWatched(data.data.watchedList)
-        
-//       })
-//       .catch((err) => {
-//         console.log("error", err)
-//       })
-//   // console.log(user.email)
-//   // getUser(user.email).then((data)=> console.log(data))
-
-// }, [])
-
-  // const { watched } = useContext(GlobalContext);
-  
   return (
     <>
       <WholeWrap>
         <Boxed>
           <Title>Watched:</Title>
           <ViewLength>
-          {watched ?
-            <div>{watched.length} movies</div>
-            : null}
+            {watched ? <div>{watched.length} movies</div> : null}
             <ViewMore
               style={{ textDecoration: "underline", color: "darkred" }}
               onClick={() => history.push("/watched")}
@@ -67,6 +43,7 @@ const WholeWrap = styled.div`
   padding-left: 100px;
   position: relative;
   z-index: 1;
+  margin-bottom: 450px;
 `;
 const Boxed = styled.div`
   width: 300px;

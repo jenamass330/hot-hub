@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-
 const ActorDetails = ({ movie, type }) => {
   const { actorId } = useParams();
   const [actor, setActor] = useState([]);
@@ -64,7 +63,6 @@ const ActorDetails = ({ movie, type }) => {
     findActor();
     findActorInfo();
   }, []);
-
 
   return (
     <>
@@ -150,12 +148,15 @@ const ActorDetails = ({ movie, type }) => {
                     src={`https://image.tmdb.org/t/p/w200${crewDetails.poster_path}`}
                   />
                 </Link>
-                <div style={{
-                  fontSize: "15px",
-                  width: "90px",
-                  textAlign: "center",
-                }}>{crewDetails.title} as {crewDetails.job}</div>
-                
+                <div
+                  style={{
+                    fontSize: "15px",
+                    width: "90px",
+                    textAlign: "center",
+                  }}
+                >
+                  {crewDetails.title} as {crewDetails.job}
+                </div>
               </Wrap>
             </>
           ))}

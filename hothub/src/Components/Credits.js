@@ -29,20 +29,18 @@ const Credits = () => {
     <SmallWrap>
       <Cast>
         {cast.map((actor) => (
-          
-            <div style={{ marginBottom: "5px" }}>
-            <StyledLink to={`/actor/${actor.id}`}>{actor.name}</StyledLink> as "{actor.character}"
-            </div>
-          
+          <div style={{ marginBottom: "5px" }}>
+            <StyledLink to={`/person/${actor.id}`}>{actor.name}</StyledLink> as "
+            {actor.character}"
+          </div>
         ))}
       </Cast>
       <Crew>
         {crew.map((prod) => (
-          
           <div style={{ marginBottom: "5px" }}>
-            {prod.known_for_department} : <StyledLink to={`/production/${prod.id}`}>{prod.name}</StyledLink>
+            {prod.known_for_department} :{" "}
+            <StyledLink to={`/person/${prod.id}`}>{prod.name}</StyledLink>
           </div>
-          
         ))}
       </Crew>
     </SmallWrap>
@@ -72,7 +70,7 @@ const Wrapper = styled.div`
 
 const StyledLink = styled(Link)`
   color: darkred;
-`
+`;
 
 const ViewMore = styled.button`
   background-color: transparent;
@@ -84,6 +82,7 @@ const ViewMore = styled.button`
   font-size: 25px;
   border-bottom: 1px solid grey;
   box-shadow: 0 4px 4px -3px darkred;
+  border-radius: 10px;
 
   &:hover {
     cursor: pointer;
@@ -106,7 +105,5 @@ const Cast = styled.div`
 const Crew = styled.div`
   font-size: 20px;
 `;
-
-
 
 export default Credits;

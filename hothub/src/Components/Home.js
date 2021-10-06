@@ -9,15 +9,14 @@ import DiscoverMini from "./DiscoverMini";
 
 import WatchListMini from "./WatchListMini";
 import NewsFeed from "./NewsFeed";
+import PeopleResultCard from "./PeopleResultCard";
 
 const Home = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [people, setPeople] = useState([])
   const [userData, setUserData] = useState({});
-
-
-
 
   // look into debouncing in React
 
@@ -35,25 +34,30 @@ const Home = () => {
           setResults([]);
         }
       });
+      fetch(`https://api.themoviedb.org/3/search/person?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1&include_adult=false&query=${e.target.value}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.errors) {
+          setPeople(data.results)
+        } else {
+          setPeople([])
+        }
+      })
+
   };
 
   useEffect(() => {
-
     if (isAuthenticated) {
       fetch("/user/" + user.email)
         .then((res) => res.json())
         .then((data) => {
-          setUserData(data.data)
-          // console.log(data.data.watchList)
+          setUserData(data.data);
         })
         .catch((err) => {
           console.log("error", err);
-        })
-      }
-
+        });
+    }
   }, [isAuthenticated]);
-
-
 
   if (isLoading) {
     return <div></div>;
@@ -82,31 +86,48 @@ const Home = () => {
             no-one will tell you the plot, so you have to work it out all
             yourself from the clues.” ― Terry Pratchett
             <Box2>
-              What kind of lunatic would ever start a movie ten minutes in? Whatever you choose to do with your time, don't forget the popcorn.
+              What kind of lunatic would ever start a movie ten minutes in?
+              Whatever you choose to do with your time, don't forget the
+              popcorn.
             </Box2>
           </Box>
         </Banners>
       </Wrap>
       <InputWrapper>
-      <WatchListMini userData={userData}/>
-      <DiscoverMini userData={userData} setUserData={setUserData} />
-      <NewsFeed />
-      <InputResult>
-        <Input
-          type="text"
-          placeholder="Search for a movie"
-          value={query}
-          onChange={onChange}
-        />
-        {results.length > 0 && (
-          <List>
-            {results.map((movie) => (
-              <li key={movie.id}>
-              <ResultCard movie={movie} userData={userData} setUserData={setUserData}/>
+        <WatchListMini userData={userData} />
+        <DiscoverMini userData={userData} setUserData={setUserData} />
+        <NewsFeed />
+        <InputResult>
+          <Input
+            type="text"
+            placeholder="Search for movie/director/actor"
+            value={query}
+            onChange={onChange}
+          />
+          {results.length > 0 && (
+            <List>
+              {results.map((movie) => (
+                <li key={movie.id}>
+                  <ResultCard
+                    movie={movie}
+                    userData={userData}
+                    setUserData={setUserData}
+                  />
+                </li>
+              ))}
+            </List>
+          )}
+          {people.length > 0 && (
+            <List>
+            {people.map((person) => (
+              <li key={person.id}>
+              <PeopleResultCard 
+              person={person}
+              />
               </li>
             ))}
-          </List>
-        )}
+            </List>
+          )}
         </InputResult>
       </InputWrapper>
     </>
@@ -144,7 +165,7 @@ const Home = () => {
 const InputResult = styled.div`
   position: absolute;
   right: 0px;
-`
+`;
 
 const Wrap = styled.div`
   background-color: #fff8dc;
@@ -206,13 +227,15 @@ const InputWrapper = styled.div`
 
 const Input = styled.input`
   border: 1px solid darkred;
-  background-color: #EAE6D7;
-  
-`
+  background-color: #eae6d7;
+  width: 320px;
+`;
 const List = styled.ul`
-margin-top: 10px;
-margin-left: 45px;
-`
+  margin-top: 10px;
+  // margin-left: 45px;
+  align-items: center;
+  text-align: center;
+`;
 
 // const NewsFeed = styled.div`
 //   text-align: center;
@@ -220,8 +243,8 @@ margin-left: 45px;
 //   width: 30%;
 //   border: 1px solid purple;
 //   position: relative;
-  
+
 // `
-const Result = styled.div``
+const Result = styled.div``;
 
 export default Home;

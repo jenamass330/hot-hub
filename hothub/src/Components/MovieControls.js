@@ -1,36 +1,24 @@
-import React, { useContext, useState, useEffect } from "react";
-import { GlobalContext } from "../Context/GlobalState";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { AiOutlineEye, AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 const MovieControls = ({ movie, type }) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  const [userData, setUserData] = useState({})
-  // const {
-  //   removeMovieFromWatchList,
-  //   addMovieToWatched,
-  //   moveToWatchList,
-  //   removeFromWatched,
-  // } = useContext(GlobalContext);
+  const { user, isAuthenticated } = useAuth0();
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
-
     if (isAuthenticated) {
       fetch("/user/" + user.email)
         .then((res) => res.json())
         .then((data) => {
-          setUserData(data.data)
-          // console.log(data.data.watchList)
+          setUserData(data.data);
         })
         .catch((err) => {
           console.log("error", err);
-        })
-      }
-
+        });
+    }
   }, [isAuthenticated]);
-
 
   const addMovieToWatched = (movie) => {
     let watchedArray = [...userData.watchedList];
@@ -52,36 +40,33 @@ const MovieControls = ({ movie, type }) => {
   };
 
   const removeMovieFromWatchList = () => {
-  //   user.watchlist.filter((mov)=> mov.id !== movie.id)
-  //   user.watchlist.forEach((mov)=> {
-  //     if (mov.id === movie.id) { 
-  //   }
-  // })
-  //   let watchArray = [...userData.watchlist]
-  //   let postedObject = {
-  //     method: "POST",
-  //     body: JSON.stringify({ email: user.email, watchlist: watchArray }),
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //     },
-  //   };
-  //   fetch("/watchlist", postedObject)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setUserData(data);
-  //       return data;
-  //     });
-  }
+    // let watchArray = [...userData.watchlist]
+    // watchArray.forEach((movie) => {
+    //   if(movie.id === movie.id) {
+    //     watchArray.filter((mov) => mov.id !== movie.id)
+    //   }
+    // })
+    // // userData.watchlist.filter((mov)=> mov.id !== movie.id)
+    // let postedObject = {
+    //   method: "POST",
+    //   body: JSON.stringify({ email: user.email, watchlist: watchArray }),
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    // };
+    // fetch("/watchlist", postedObject)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setUserData(data);
+    //     return data;
+    //   });
+  };
 
-  const moveToWatchList = () => {
 
-  }
+  const moveToWatchList = () => {};
 
-  const removeFromWatched = () => {
-
-  }
-
+  const removeFromWatched = () => {};
 
   return (
     <InnerCard>
@@ -136,7 +121,7 @@ const Button = styled.button`
   opacity: 0.5;
   &:hover {
     cursor: pointer;
-    background-color: #EAE6D7;
+    background-color: #eae6d7;
     filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
     opacity: 1;
   }
