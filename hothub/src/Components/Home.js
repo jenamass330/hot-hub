@@ -68,7 +68,7 @@ const Home = () => {
         <div></div>
         <Banners style={{ backgroundColor: "#ffc40c" }}>
           <img
-            src={Popcorn}
+            src={Popcorn} alt="popcorn"
             style={{
               height: "370px",
               padding: "0",
@@ -94,7 +94,7 @@ const Home = () => {
         </Banners>
       </Wrap>
       <InputWrapper>
-        <WatchListMini userData={userData} />
+        <WatchListMini setUserData={setUserData} userData={userData} />
         <DiscoverMini userData={userData} setUserData={setUserData} />
         <NewsFeed />
         <InputResult>
@@ -136,7 +136,7 @@ const Home = () => {
       <Wrap>
         <Banners style={{ backgroundColor: "#ffc40c" }}>
           <img
-            src={Popcorn}
+            src={Popcorn} alt="popcorn"
             style={{
               height: "370px",
               padding: "0",
@@ -237,14 +237,6 @@ const List = styled.ul`
   text-align: center;
 `;
 
-// const NewsFeed = styled.div`
-//   text-align: center;
-//   display: block;
-//   width: 30%;
-//   border: 1px solid purple;
-//   position: relative;
 
-// `
-const Result = styled.div``;
 
 export default Home;

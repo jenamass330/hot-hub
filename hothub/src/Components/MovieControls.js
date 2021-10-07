@@ -1,24 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { AiOutlineEye, AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const MovieControls = ({ movie, type }) => {
-  const { user, isAuthenticated } = useAuth0();
-  const [userData, setUserData] = useState({});
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetch("/user/" + user.email)
-        .then((res) => res.json())
-        .then((data) => {
-          setUserData(data.data);
-        })
-        .catch((err) => {
-          console.log("error", err);
-        });
-    }
-  }, [isAuthenticated]);
+const MovieControls = ({ movie, type, userData, setUserData }) => {
+  const { user } = useAuth0();
 
   const addMovieToWatched = (movie) => {
     let watchedArray = [...userData.watchedList];
@@ -35,17 +21,14 @@ const MovieControls = ({ movie, type }) => {
       .then((res) => res.json())
       .then((data) => {
         setUserData(data);
-        return data;
       });
   };
 
-
   const removeMovieFromWatchList = (movie) => {
-    let watchArray = [...userData.watchlist]
-    console.log(watchArray)
-          watchArray.filter((mov) => {
-            return mov.id !== movie.id
-          })
+    let watchArray = [...userData.watchlist];
+    watchArray = watchArray.filter((mov) => {
+      return mov.id !== movie.id;
+    });
     let postObject = {
       method: "PUT",
       body: JSON.stringify({ email: user.email, watchlist: watchArray }),
@@ -58,31 +41,48 @@ const MovieControls = ({ movie, type }) => {
       .then((res) => res.json())
       .then((data) => {
         setUserData(data);
-        return data;
+        window.location.reload()
       });
   };
 
-  const moveToWatchList = () => {};
+  const moveToWatchList = (movie) => {
+    let watchArray = [...userData.watchlist];
+    watchArray.push(movie);
+    let postedObject = {
+      method: "PUT",
+      body: JSON.stringify({ email: user.email, watchlist: watchArray }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+    fetch("/watchlist", postedObject)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserData(data);
+      });
+
+  };
 
   const removeFromWatched = (movie) => {
-    // let watchedArray = [...userData.watchedList]
-    //       watchedArray.filter((mov) => {
-    //         return mov.id !== movie.id
-    //       })
-    // let postedObject = {
-    //   method: "PUT",
-    //   body: JSON.stringify({ email: user.email, watchlist: watchedArray }),
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    // };
-    // fetch("/watchedlist", postedObject)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setUserData(data);
-    //     return data;
-    //   });
+    let watchedArray = [...userData.watchedList];
+    watchedArray = watchedArray.filter((mov) => {
+      return mov.id !== movie.id;
+    });
+    let postedObject = {
+      method: "PUT",
+      body: JSON.stringify({ email: user.email, watchedList: watchedArray }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+    fetch("/watchedlist", postedObject)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserData(data);
+        window.location.reload()
+      });
   };
 
   return (
@@ -92,7 +92,10 @@ const MovieControls = ({ movie, type }) => {
           <Wrapper>
             <Button
               style={{ border: "none" }}
-              onClick={() => addMovieToWatched(movie)}
+              onClick={() => {
+                addMovieToWatched(movie);
+                removeMovieFromWatchList(movie);
+              }}
             >
               <AiOutlineCheck />
             </Button>
@@ -110,13 +113,16 @@ const MovieControls = ({ movie, type }) => {
           <Wrapper>
             <Button
               style={{ border: "none" }}
-              onClick={() => moveToWatchList(movie)}
+              onClick={() => {
+                moveToWatchList(movie);
+                removeFromWatched(movie);
+              }}
             >
               <AiOutlineEye />
             </Button>
             <Button
               style={{ border: "none" }}
-              onClick={() => removeFromWatched(movie.id)}
+              onClick={() => removeFromWatched(movie)}
             >
               <AiOutlineClose />
             </Button>

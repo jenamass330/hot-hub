@@ -103,13 +103,7 @@ const QuoteBar = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
-const Quote = styled.div`
-  font-size: 20px;
-  font-weight: bold;
-`;
-const Movie = styled.div`
-  font-size: 15px;
-`;
+
 const Profile = styled.div`
   &:hover {
     cursor: pointer;

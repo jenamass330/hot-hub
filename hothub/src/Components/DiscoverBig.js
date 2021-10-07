@@ -63,10 +63,6 @@ const Grid = styled.div`
   flex-wrap: wrap;
 `;
 
-const Div = styled.div`
-  /* display: none; */
-  background-color: white;
-`;
 const Card = styled.div`
   &:hover + Div {
     display: block;

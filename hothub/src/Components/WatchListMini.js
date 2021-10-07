@@ -3,8 +3,10 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import MovieCard from "./MovieCard";
 
-const WatchListMini = ({ userData }) => {
+const WatchListMini = ({ userData, setUserData }) => {
   let history = useHistory();
+
+
 
   return (
     <>
@@ -28,7 +30,7 @@ const WatchListMini = ({ userData }) => {
                 {userData.watchlist.length > 0 ? (
                   <Grid>
                     {userData.watchlist.slice(0, 6).map((movie) => (
-                      <MovieCard title={movie} movie={movie} type="watchList" />
+                      <MovieCard setUserData={setUserData} userData={userData} title={movie} movie={movie} type="watchList" />
                     ))}
                   </Grid>
                 ) : (

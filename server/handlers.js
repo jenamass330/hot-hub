@@ -182,21 +182,24 @@ const updateWatchedList = async (req, res) => {
   }
 };
 
-const deleteFromWatchList = async (req, res) => {
-  const id = req.params.id;
-  const client = await new MongoClient(MONGO_URI, options);
-  await client.connect();
-  const db = client.db("HotHub");
+// const deleteFromWatchList = async (req, res) => {
+//   const id = req.params.id;
+//   const email = req.params.email
+//   const client = await new MongoClient(MONGO_URI, options);
+//   await client.connect();
+//   const db = client.db("HotHub");
 
-  try {
-    await db.collection("users").findOne({ id });
-
-    await db.collection("users").deleteOne({ id });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ status: 500, message: "nope" });
-  }
-};
+//   try {
+//    db.collection('users').updateOne({watchlist: {id}}, {$pull: {incoming: {$in:{id}}}})
+//    res
+//       .status(200)
+//       .json({ status: 200, message: "review posted" });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json({ status: 500, message: "nope" });
+//   }
+//   client.close()
+// };
 
 const postReviewToMoviePage = async (req, res) => {
   const client = await new MongoClient(MONGO_URI, options);
@@ -310,7 +313,6 @@ module.exports = {
   postUser,
   updateWatchlist,
   updateWatchedList,
-  deleteFromWatchList,
   postReviewToMoviePage,
   getReviews,
   getReviewsById,

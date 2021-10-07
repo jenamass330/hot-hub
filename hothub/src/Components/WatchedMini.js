@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import MovieCard from "./MovieCard";
 import styled from "styled-components";
 
-const WatchedMini = ({ watched }) => {
+const WatchedMini = ({ watched, setUserData, userData}) => {
   // const [watched, setWatched] = useState([])
   let history = useHistory();
 
@@ -26,7 +26,7 @@ const WatchedMini = ({ watched }) => {
             {watched.length > 0 ? (
               <Grid>
                 {watched.slice(0, 6).map((movie) => (
-                  <MovieCard movie={movie} type="watched" />
+                  <MovieCard setUserData={setUserData} userData={userData} movie={movie} type="watched" />
                 ))}
               </Grid>
             ) : (

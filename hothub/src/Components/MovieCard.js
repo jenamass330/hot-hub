@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import MovieControls from "./MovieControls";
 
-const MovieCard = ({ movie, type }) => {
+const MovieCard = ({ movie, type, userData, setUserData }) => {
   return (
     <>
       <Card>
@@ -21,7 +21,7 @@ const MovieCard = ({ movie, type }) => {
             <div></div>
           )}
         </Overlay>
-        <MovieControls type={type} movie={movie} />
+        <MovieControls setUserData={setUserData} userData={userData} type={type} movie={movie} />
       </Card>
     </>
   );

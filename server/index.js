@@ -4,7 +4,7 @@
 const express = require("express");
 const morgan = require("morgan");
 
-const { testing, getUsers, getUser, postUser, updateWatchlist, updateWatchedList,deleteFromWatchList, postReviewToMoviePage, getReviews, getReviewsById} = require("./handlers");
+const { testing, getUsers, getUser, postUser, updateWatchlist, updateWatchedList, postReviewToMoviePage, getReviews, getReviewsById} = require("./handlers");
 
 express()
   .use(express.static("public"))
@@ -30,8 +30,6 @@ express()
   .put('/watchlist', updateWatchlist)
 
   .put('/watchedlist', updateWatchedList)
-
-  .delete('/watchlist/:id', deleteFromWatchList)
 
   // this is our catch all endpoint.
   .get("*", (req, res) => {

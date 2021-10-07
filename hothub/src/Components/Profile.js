@@ -23,6 +23,7 @@ const Profile = () => {
     }
   }, [isAuthenticated]);
 
+
   if (isLoading) {
     return <div></div>;
   }
@@ -37,8 +38,8 @@ const Profile = () => {
           </Wrap>
         </BigWrap>
 
-        <WatchListMini userData={userData} />
-        {userData.watchedList && <WatchedMini watched={userData.watchedList} />}
+        <WatchListMini setUserData={setUserData} userData={userData} />
+        {userData.watchedList && <WatchedMini setUserData={setUserData} userData={userData} watched={userData.watchedList} />}
         <Title>Ratings and Reviews</Title>
         <ReviewWrapper>
           <UserName>{user.name} left a review on:</UserName>

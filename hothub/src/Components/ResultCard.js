@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
+import { AiOutlineEye, AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 
 const ResultCard = ({ movie, userData, setUserData }) => {
   const { user } = useAuth0();
@@ -31,7 +32,7 @@ const ResultCard = ({ movie, userData, setUserData }) => {
       .then((res) => res.json())
       .then((data) => {
         setUserData(data);
-        window.location.reload()
+        window.location.reload();
       });
   };
 
@@ -76,7 +77,7 @@ const ResultCard = ({ movie, userData, setUserData }) => {
       .then((res) => res.json())
       .then((data) => {
         setUserData(data);
-        return data;
+        window.location.reload();
       });
   };
 
@@ -107,13 +108,13 @@ const ResultCard = ({ movie, userData, setUserData }) => {
             disabled={disabled}
             onClick={() => addMovieToWatchList(movie)}
           >
-            Add to Watchlist
+            <AiOutlineEye />
           </Button>
           <Button
             disabled={disabledButton}
             onClick={() => addMovieToWatched(movie)}
           >
-            Add to Watched
+            <AiOutlineCheck />
           </Button>
         </Controls>
       </Info>
@@ -136,6 +137,23 @@ const Release = styled.h4`
   text-align: center;
 `;
 const Controls = styled.div``;
-const Button = styled.button``;
+const Button = styled.button`
+  border: none;
+  margin-bottom: 10px;
+  background-color: transparent;
+  border-radius: 50%;
+  opacity: 0.5;
+  font-size: 25px;
+  &:hover {
+    cursor: pointer;
+    background-color: #eae6d7;
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+    opacity: 1;
+  }
+  &:active {
+    transform: scale(0.9);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+  }
+`;
 
 export default ResultCard;

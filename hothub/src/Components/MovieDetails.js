@@ -43,7 +43,7 @@ const MovieDetails = () => {
     <>
       <BigWrap>
         <img
-          style={{ height: "300px", width: "205px" }}
+          style={{ height: "300px", width: "205px" }} alt="movie poster"
           src={`https://image.tmdb.org/t/p/w200${film.poster_path}`}
         ></img>
         <Wrapper>
@@ -72,7 +72,7 @@ const MovieDetails = () => {
       provider.map((prov) => (
         
           <div style={{textAlign:"center"}}>
-            <Logo src={`https://image.tmdb.org/t/p/w200${prov.logo_path}`} />
+            <Logo src={`https://image.tmdb.org/t/p/w200${prov.logo_path}`} alt="logo image" />
             <div style={{width: "100px"}}>{prov.provider_name}</div>
           </div>
         
